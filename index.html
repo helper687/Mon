@@ -70,94 +70,73 @@
     <!-- First Python Code -->
     <div class="code-container">
         <div class="code-header">
-            <h2>Leaky Bucket Algorithm for congestion control</h2>
+            <h2>PEAS</h2>
             <button class="copy-btn" onclick="copyCode('code1', this)">
                 Copy Code
             </button>
         </div>
 
-        <pre class="hidden-code" id="code1"># Leaky Bucket Algorithm
-bucket_capacity = 10
-output_rate = 3
-bucket_content = 0
-
-n = int(input("Enter number of packets: "))
-
-for i in range(n):
-    packet_size = int(input("Enter packet size: "))
-
-    if bucket_content + packet_size <= bucket_capacity:
-        bucket_content += packet_size
-        print("Packet accepted")
-    else:
-        print("Packet rejected")
-
-    sent = min(bucket_content, output_rate)
-    bucket_content -= sent
-
-    print("Packets sent:", sent)
-    print("Remaining packets:", bucket_content)
-
-print("Transmission completed")</pre>
+        <pre class="hidden-code" id="code1">NO</pre>
     </div>
 
     <div class="code-container">
         <div class="code-header">
-            <h2>stop and wait protocol</h2>
+            <h2>Expert system</h2>
             <button class="copy-btn" onclick="copyCode('code2', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code2">
-
-n = int(input("Enter number of frames: "))
-
-for i in range(1, n + 1):
-    print("Frame", i, "sent")
-    ack = input("Acknowledgement received? (yes/no): ")
-
-    if ack.lower() == "yes":
-        print("Frame", i, "transmitted successfully")
-    else:
-        print("Frame", i, "retransmitted")
-        print("Acknowledgement received")
-        print("Frame", i, "transmitted successfully")
-
-print("Transmission completed")
+NO
 </pre>
     </div>
 
     <div class="code-container">
         <div class="code-header">
-            <h2>sliding window protocol</h2>
+            <h2>N QUEEN, 8/15 puzzle, water jug and TSP</h2>
             <button class="copy-btn" onclick="copyCode('code3', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code3">
+#n queen problem
 
-window_size = int(input("Enter window size: "))
-total_frames = int(input("Enter total number of frames: "))
+def solve_n_queens(n):
+    board = [-1] * n
 
-sent = 0
+    def is_safe(row, col):
+        for i in range(row):
+            if board[i] == col or abs(board[i] - col) == abs(i - row):
+                return False
+        return True
 
-while sent < total_frames:
-    end = min(sent + window_size, total_frames)
+    def solve(row):
+        if row == n:
+            for i in range(n):
+                for j in range(n):
+                    print("Q" if board[i] == j else ".", end=" ")
+                print()
+            return True
 
-    for i in range(sent, end):
-        print("Frame", i + 1, "sent")
+        for col in range(n):
+            if is_safe(row, col):
+                board[row] = col
+                if solve(row + 1):
+                    return True
+                board[row] = -1
+        return False
 
-    ack = int(input("Enter last acknowledged frame number: "))
+    if not solve(0):
+        print("No solution exists")
 
-    if ack > sent and ack <= end:
-        sent = ack
-        print("Acknowledgement received")
-    else:
-        print("Invalid acknowledgement")
+n = int(input("Enter number of queens: "))
+solve_n_queens(n)
 
-print("All frames transmitted successfully")
+
+#8/15 puzzle
+YE CUT KARKE CONTINUE KARO YAHASE AUR AAGE TITLE AUR CODE CUT KAR KARKE NEW NEW ADD KARNA 
 </pre>
     </div>
 
