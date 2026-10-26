@@ -102,214 +102,495 @@ NO
 
         <pre class="hidden-code" id="code3">
 #n queen problem
+n = int(input("Enter number of queens: "))
+board = []
 
-def solve_n_queens(n):
-    board = [-1] * n
-
-    def is_safe(row, col):
-        for i in range(row):
-            if board[i] == col or abs(board[i] - col) == abs(i - row):
-                return False
+def solve(row):
+    if row == n:
+        print("Solution:", board)
         return True
 
-    def solve(row):
-        if row == n:
-            for i in range(n):
-                for j in range(n):
-                    print("Q" if board[i] == j else ".", end=" ")
-                print()
-            return True
+    for col in range(n):
+        if all(col != board[i] and
+               abs(col - board[i]) != row - i
+               for i in range(row)):
+            board.append(col)
 
-        for col in range(n):
-            if is_safe(row, col):
-                board[row] = col
-                if solve(row + 1):
-                    return True
-                board[row] = -1
-        return False
+            if solve(row + 1):
+                return True
 
-    if not solve(0):
-        print("No solution exists")
+            board.pop()
 
-n = int(input("Enter number of queens: "))
-solve_n_queens(n)
+    return False
+
+if not solve(0):
+    print("No solution exists")
+
+Enter number of queens: 4
+Solution: [1, 3, 0, 2]
+
+Explanation
+Backtracking places queens row by row on the chessboard. The board list stores each queen's column position, while the solve(row) function tries to place a queen in a safe position. The all() function checks column and diagonal conflicts, and abs() calculates the difference between positions. If a position is unsafe, board.pop() removes the last queen and tries another position. If no valid arrangement exists, the program prints No solution exists.
+
+Result: The N-Queen problem is solved using backtracking.
 
 
-#8/15 puzzle
-YE CUT KARKE CONTINUE KARO YAHASE AUR AAGE TITLE AUR CODE CUT KAR KARKE NEW NEW ADD KARNA 
+8/15 puzzle problem
+
+from collections import deque
+
+n = int(input("Enter size (3 for 8-puzzle, 4 for 15-puzzle): "))
+size = n * n
+
+print("Enter puzzle numbers (use 0 for blank):")
+start = tuple(map(int, input().split()))
+
+goal = tuple(list(range(1, size)) + [0])
+
+q = deque([(start, [])])
+visited = {start}
+
+while q:
+    state, path = q.popleft()
+
+    if state == goal:
+        print("Solution:")
+        for s in path + [state]:
+            print(s)
+        break
+
+    z = state.index(0)
+
+    for m in [-n, n, -1, 1]:
+        p = z + m
+
+        if 0 <= p < size and not (
+            (m == -1 and z % n == 0) or
+            (m == 1 and z % n == n-1)
+        ):
+            new = list(state)
+            new[z], new[p] = new[p], new[z]
+            new = tuple(new)
+
+            if new not in visited:
+                visited.add(new)
+                q.append((new, path + [state]))
+else:
+    print("No solution found")
+
+
+Enter size (3 for 8-puzzle, 4 for 15-puzzle): 3
+Enter puzzle numbers (use 0 for blank):
+1 2 3 4 0 6 7 5 8
+
+Solution:
+(1, 2, 3, 4, 0, 6, 7, 5, 8)
+(1, 2, 3, 4, 5, 6, 7, 0, 8)
+(1, 2, 3, 4, 5, 6, 7, 8, 0)
+
+Explanation: BFS (Breadth-First Search) explores puzzle states level by level. Queue (deque) stores states to be explored, while the visited set prevents repeated states. The initial state is entered by the user, and the goal state contains numbers in order with 0 representing the blank space. Blank movement swaps 0 with an adjacent number, and the path stores the sequence of states until the goal is reached.
+
+
+water jug problem
+
+from collections import deque
+
+a = int(input("Enter capacity of first jug: "))
+b = int(input("Enter capacity of second jug: "))
+target = int(input("Enter target amount: "))
+
+q = deque([(0, 0)])
+visited = {(0, 0)}
+
+while q:
+    x, y = q.popleft()
+    print(x, y)
+
+    if x == target or y == target:
+        print("Target reached!")
+        break
+
+    states = [
+        (a, y), (x, b), (0, y), (x, 0),
+        (x - min(x, b-y), y + min(x, b-y)),
+        (x + min(y, a-x), y - min(y, a-x))
+    ]
+
+    for s in states:
+        if s not in visited:
+            visited.add(s)
+            q.append(s)
+else:
+    print("Target cannot be measured")
+
+
+Enter capacity of first jug: 4
+Enter capacity of second jug: 3
+Enter target amount: 2
+
+0 0
+4 0
+0 3
+4 3
+1 3
+3 0
+1 0
+3 3
+0 1
+4 2
+Target reached!
+
+Explanation
+BFS (Breadth-First Search) explores possible water-jug states level by level. The queue stores the water amounts in both jugs, and visited prevents repeated states. The states list represents filling, emptying, and transferring water between the jugs. The min() function calculates the maximum transferable amount without overflowing a jug. The process continues until one jug contains the target amount.
+
+Result: The Water Jug problem is solved using BFS.
+
+
+
+Travel salesman problem (TSP)
+
+from itertools import permutations
+
+n = int(input("Enter number of cities: "))
+
+cost = []
+for i in range(n):
+    row = list(map(int, input(f"Enter costs for city {i}: ").split()))
+    cost.append(row)
+
+cities = list(range(1, n))
+min_cost = float('inf')
+
+for p in permutations(cities):
+    path = (0,) + p + (0,)
+    total = 0
+
+    for i in range(n):
+        total += cost[path[i]][path[i+1]]
+
+    if total < min_cost:
+        min_cost = total
+        best_path = path
+
+print("Best route:", best_path)
+print("Minimum cost:", min_cost)
+
+
+Enter number of cities: 4
+Enter costs for city 0: 0 10 15 20
+Enter costs for city 1: 10 0 35 25
+Enter costs for city 2: 15 35 0 30
+Enter costs for city 3: 20 25 30 0
+
+Best route: (0, 1, 3, 2, 0)
+Minimum cost: 80
+
+Explanation
+TSP (Travelling Salesman Problem) finds the minimum-cost route that visits every city once and returns to the starting city. The cost matrix stores travel costs between cities, and permutations() generates all possible visiting orders. The path starts and ends at city 0, while the total variable calculates each route's cost. The min_cost variable stores the lowest cost, and best_path stores the corresponding route.
+
+Result: The Travelling Salesman Problem is solved using brute-force search.
 </pre>
     </div>
 
     <div class="code-container">
         <div class="code-header">
-            <h2>methods of framing</h2>
+            <h2>A* Search and Alpha-Beta Pruning</h2>
             <button class="copy-btn" onclick="copyCode('code4', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code4">
-data = input("Enter the data: ")
+A* Search Algorithm
 
-frame = str(len(data) + 1) + data
+graph = {
+    'A': [('B', 1), ('C', 3)],
+    'B': [('D', 1), ('E', 5)],
+    'C': [('F', 2)],
+    'D': [],
+    'E': [],
+    'F': []
+}
 
-print("Framed Data:", frame)
-print("Data sent successfully")
+h = {'A': 4, 'B': 2, 'C': 1, 'D': 0, 'E': 0, 'F': 0}
+
+start = input("Enter start node: ")
+goal = input("Enter goal node: ")
+
+open_list = [(h[start], 0, start, [start])]
+
+while open_list:
+    open_list.sort()
+    f, g, node, path = open_list.pop(0)
+
+    if node == goal:
+        print("Path:", path)
+        print("Cost:", g)
+        break
+
+    for neighbour, cost in graph[node]:
+        new_g = g + cost
+        new_f = new_g + h[neighbour]
+        open_list.append((new_f, new_g, neighbour, path + [neighbour]))
+else:
+    print("Path not found")
+
+
+Enter start node: A
+Enter goal node: D
+
+Path: ['A', 'B', 'D']
+Cost: 2
+
+Explanation
+A* Search is an informed search algorithm that finds a path using the evaluation function \(f(n)=g(n)+h(n)\). Here, g(n) represents the actual cost from the start node, h(n) is the estimated cost to the goal, and f(n) is the total estimated cost. The graph stores connected nodes and their costs, while open_list stores nodes waiting to be explored. The algorithm selects the node with the lowest f value until the goal is reached.
+
+Result: A* search is implemented to find a path between two nodes
+
+
+Alpha-Beta 
+
+def alphabeta(depth, index, maximizing, values, alpha, beta):
+    if depth == 2:
+        return values[index]
+
+    if maximizing:
+        best = -999
+
+        for i in range(2):
+            value = alphabeta(depth + 1, index * 2 + i,
+                              False, values, alpha, beta)
+            best = max(best, value)
+            alpha = max(alpha, best)
+
+            if beta <= alpha:
+                break
+
+        return best
+
+    else:
+        best = 999
+
+        for i in range(2):
+            value = alphabeta(depth + 1, index * 2 + i,
+                              True, values, alpha, beta)
+            best = min(best, value)
+            beta = min(beta, best)
+
+            if beta <= alpha:
+                break
+
+        return best
+
+
+values = list(map(int, input("Enter 4 leaf values: ").split()))
+
+answer = alphabeta(0, 0, True, values, -999, 999)
+print("Optimal value:", answer)
+
+
+Enter 4 leaf values: 3 5 6 9
+
+Optimal value: 5/6
+
+Explanation
+Alpha-Beta Pruning improves the Minimax algorithm by avoiding branches that cannot affect the final decision. The maximizing player chooses the maximum value, while the minimizing player chooses the minimum value. alpha stores the best value for the maximizing player, and beta stores the best value for the minimizing player. When beta <= alpha, the remaining branches are pruned because they cannot change the result.
+
+Result: Alpha-Beta pruning is implemented to find the optimal value while reducing unnecessary searches.
 </pre>
     </div>    
 
     <!-- Second Python Code -->
     <div class="code-container">
         <div class="code-header">
-            <h2>distance vector routing algorithm</h2>
+            <h2>Single Layer Perceptron</h2>
             <button class="copy-btn" onclick="copyCode('code5', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code5">
-# Distance Vector Routing Algorithm
+# AND gate using Perceptron Learning Rule
 
-n = int(input("Enter number of routers: "))
+inputs = [(0, 0), (0, 1), (1, 0), (1, 1)]
+targets = [0, 0, 0, 1]
 
-print("Enter the cost matrix (use 999 for infinity):")
-cost = []
+w1 = 0
+w2 = 0
+bias = 0
+lr = 0.1
 
-for i in range(n):
-    cost.append(list(map(int, input().split())))
+for epoch in range(10):
+    for i in range(4):
+        x1, x2 = inputs[i]
+        output = 1 if w1*x1 + w2*x2 + bias > 0 else 0
+        error = targets[i] - output
 
-dist = [row[:] for row in cost]
+        w1 += lr * error * x1
+        w2 += lr * error * x2
+        bias += lr * error
 
-for k in range(n):
-    for i in range(n):
-        for j in range(n):
-            if dist[i][j] > dist[i][k] + dist[k][j]:
-                dist[i][j] = dist[i][k] + dist[k][j]
+print("Predictions:")
+for x1, x2 in inputs:
+    output = 1 if w1*x1 + w2*x2 + bias > 0 else 0
+    print(x1, x2, "=", output)
 
-print("\nShortest distance between routers:")
-for i in range(n):
-    print("Router", i + 1, ":", dist[i])
+
+
+Predictions:
+0 0 = 0
+0 1 = 0
+1 0 = 0
+1 1 = 1
+
+
+Explanation
+A single-layer perceptron is a basic artificial neuron used for binary classification. The inputs (x1, x2) are multiplied by weights (w1, w2) and added to the bias. The activation function produces either 0 or 1. The Perceptron Learning Rule updates the weights and bias using the prediction error and learning rate (lr). Training repeats for several epochs until the perceptron learns the AND gate.
+
+Result: A single-layer perceptron is implemented successfully using the Perceptron Learning Rule.
+
 </pre>
     </div>
 
     <!-- First Python Code -->
     <div class="code-container">
         <div class="code-header">
-            <h2>socket program</h2>
+            <h2>Multi Layer Perceptron</h2>
             <button class="copy-btn" onclick="copyCode('code6', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code6">
+from sklearn.neural_network import MLPClassifier
 
-            server.py
-import socket
+# Training data (XOR gate)
+X = [[0, 0], [0, 1], [1, 0], [1, 1]]
+y = [0, 1, 1, 0]
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.bind(('localhost', 12345))
+# Create and train MLP
+model = MLPClassifier(
+    hidden_layer_sizes=(4,),
+    activation='relu',
+    solver='lbfgs',
+    max_iter=2000,
+    random_state=1
+)
 
-print("Server is waiting for ping...")
+model.fit(X, y)
 
-while True:
-    data, addr = s.recvfrom(1024)
-    print("Received:", data.decode())
+# Predict output
+print("Predictions:")
+for x in X:
+    print(x, "=", model.predict([x])[0])
 
-    s.sendto("Pong".encode(), addr)
 
-    .........client . py
-    
-import socket
-import time
+# pip install scikit-learn
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.settimeout(2)
+Predictions:
+[0, 0] = 0
+[0, 1] = 1
+[1, 0] = 1
+[1, 1] = 0
 
-for i in range(4):
-    start = time.time()
+Explanation
+A Multi-Layer Perceptron (MLP) is a neural network containing an input layer, one or more hidden layers, and an output layer. Supervised learning trains the model using input data (X) and their correct labels (y). MLPClassifier creates the neural network, hidden_layer_sizes specifies the hidden layer, and fit() trains the model using backpropagation. Finally, predict() predicts the output for each input.
 
-    s.sendto("Ping".encode(), ('localhost', 12345))
+Result: A Multi-Layer Perceptron is implemented using supervised learning to learn the XOR gate.
 
-    try:
-        data, addr = s.recvfrom(1024)
-        end = time.time()
-
-        print("Reply:", data.decode(),
-              "Time:", round((end - start) * 1000, 2), "ms")
-    except socket.timeout:
-        print("Request timed out")
-
-s.close()
- 
-
-RUN. server.py in first terminal then in other terminal run client.py
 
 </pre>
     </div>
 
     <div class="code-container">
         <div class="code-header">
-            <h2>ip address configuration</h2>
+            <h2>Kohonen Self-organizing Map or Vector Quantization</h2>
             <button class="copy-btn" onclick="copyCode('code7', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code7">
-import ipaddress
+from sklearn.cluster import KMeans
 
-ip = input("Enter IP address: ")
-mask = input("Enter subnet mask: ")
+# Input data
+X = [[1, 2], [2, 3], [3, 4],
+     [8, 9], [9, 8], [10, 10]]
 
-network = ipaddress.IPv4Network(
-    ip + "/" + mask, strict=False
-)
+k = int(input("Enter number of clusters: "))
 
-print("IP Address:", ip)
-print("Subnet Mask:", network.netmask)
-print("Network Address:", network.network_address)
-print("Broadcast Address:", network.broadcast_address)
-print("Number of Hosts:", network.num_addresses - 2)
+model = KMeans(n_clusters=k, random_state=0, n_init=10)
+model.fit(X)
+
+print("Cluster labels:", model.labels_)
+print("Cluster centers:")
+print(model.cluster_centers_)
 
 
- SAMPLE 
-IP Address: 192.168.1.100
-Subnet Mask: 255.255.255.0
-Network Address: 192.168.1.0
-Broadcast Address: 192.168.1.255
-Number of Hosts: 254</pre>
+# pip install scikit-learn
+
+Enter number of clusters: 2
+
+Cluster labels: [1 1 1 0 0 0]
+Cluster centers:
+[[ 9.   9. ]
+ [ 2.   3. ]]
+
+Note: Cluster label order may vary.
+
+Explanation
+Unsupervised learning finds patterns in data without predefined output labels. K-Means divides data into a specified number of clusters (k). fit() trains the model by grouping similar data points, labels_ shows the cluster assigned to each point, and cluster_centers_ gives the center of each cluster.
+
+Result: An unsupervised learning algorithm is implemented using K-Means clustering.
+
+</pre>
     </div>
     
     <div class="code-container">
         <div class="code-header">
-            <h2>program for TRACE route</h2>
+            <h2>Associative memory Network</h2>
             <button class="copy-btn" onclick="copyCode('code8', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code8">
-import subprocess
-import platform
+import numpy as np
 
-host = input("Enter destination IP or domain: ")
+# Stored patterns
+X = np.array([
+    [1, -1, 1, -1],
+    [-1, 1, -1, 1]
+])
 
-if platform.system().lower() == "windows":
-    command = ["tracert", host]
-else:
-    command = ["traceroute", host]
+# Create weight matrix
+W = X.T @ X
+np.fill_diagonal(W, 0)
 
-try:
-    subprocess.run(command)
-except FileNotFoundError:
-    print("Traceroute command not found. Please install it.")
+# Take input from user
+x = np.array(list(map(int, input(
+    "Enter 4 values (-1 or 1): ").split())))
+
+# Recall pattern
+y = np.sign(W @ x)
+
+print("Recalled pattern:", y)
+
+Enter 4 values (-1 or 1): 1 -1 1 -1
+
+Recalled pattern: [ 1. -1.  1. -1.]
+
+Explanation
+An Associative Memory Network stores patterns and recalls them when an input is provided. The stored patterns (X) are represented using 1 and -1. The weight matrix (W) stores relationships between pattern elements, and np.fill_diagonal() sets its diagonal values to zero. The recall operation multiplies the weight matrix by the input pattern, while np.sign() converts the result into 1 or -1.
+
+Result: An associative memory network is implemented using a simple Hopfield-style weight matrix.
 </pre>
     </div>
     
     <!-- First Python Code -->
     <div class="code-container">
         <div class="code-header">
-            <h2>file transfer in client and server
+            <h2>Fuzzy Membership Function and Fuzzification
             </h2>
             <button class="copy-btn" onclick="copyCode('code9', this)">
                 Copy Code
@@ -317,64 +598,38 @@ except FileNotFoundError:
         </div>
 
         <pre class="hidden-code" id="code9">
-import socket
+x = float(input("Enter temperature (0-40): "))
 
-s = socket.socket()
-s.bind(('localhost', 12345))
-s.listen(1)
+# Membership functions
+def cold(x):
+    return max(0, min(1, (20 - x) / 10))
 
-print("Server waiting for connection...")
-conn, addr = s.accept()
-print("Client connected:", addr)
+def warm(x):
+    return max(0, min((x - 10) / 10, (30 - x) / 10, 1))
 
-filename = conn.recv(1024).decode()
+def hot(x):
+    return max(0, min(1, (x - 20) / 10))
 
-with open("received_" + filename, "wb") as f:
-    while True:
-        data = conn.recv(1024)
-        if not data:
-            break
-        f.write(data)
+# Fuzzification
+print("Cold:", cold(x))
+print("Warm:", warm(x))
+print("Hot:", hot(x))
 
-print("File received successfully")
-conn.close()
-s.close()
+Enter temperature (0-40): 25
 
+Cold: 0
+Warm: 0.5
+Hot: 0.5
 
-CLIENT.PY
+Explanation
+Fuzzy logic represents values with degrees of membership between 0 and 1. A membership function determines how strongly an input belongs to a fuzzy set such as Cold, Warm, or Hot. Fuzzification converts a crisp input, such as a temperature of 25°C, into fuzzy membership values. The min() and max() functions keep membership values within the range 0 to 1.
 
-
-import socket
-import os
-
-s = socket.socket()
-s.connect(('localhost', 12345))
-
-filename = input("Enter filename to send: ")
-
-s.send(filename.encode())
-
-with open(filename, "rb") as f:
-    while True:
-        data = f.read(1024)
-        if not data:
-            break
-        s.sendall(data)
-
-s.shutdown(socket.SHUT_WR)
-print("File sent successfully")
-
-s.close()
-
-
-NOW CREATE SAMPLE.TXT AND WRITE ANYTHING 
-NOW RUN SERVER.PY AND CLEINT .PY.... WRITE FILE NAME AS SAMPLE.TXT
-DONEE
+Result: Fuzzy membership functions are implemented, and the input temperature is fuzzified.
     </div>
 
     <div class="code-container">
         <div class="code-header">
-            <h2>WAP to demonstrate usage of nslookup</h2>
+            <h2>Fuzzy Logic Controller</h2>
             <button class="copy-btn" onclick="copyCode('code10', this)">
                 Copy Code
             </button>
@@ -382,15 +637,141 @@ DONEE
 
         <pre class="hidden-code" id="code10">
 
-import os
+temp = float(input("Enter temperature (0-40): "))
 
-domain = input("Enter domain name: ")
+# Fuzzification
+cold = max(0, min(1, (25 - temp) / 10))
+warm = max(0, min(1, (temp - 15) / 10))
+hot = max(0, min(1, (temp - 25) / 10))
 
-print("DNS lookup result:")
-os.system("nslookup " + domain)
+# Fuzzy rules
+if temp <= 15:
+    speed = 0
+elif temp <= 25:
+    speed = 40
+elif temp <= 35:
+    speed = 70
+else:
+    speed = 100
+
+# Output
+print("Cold membership:", round(cold, 2))
+print("Warm membership:", round(warm, 2))
+print("Hot membership:", round(hot, 2))
+print("Fan speed:", speed, "%")
+
+Enter temperature (0-40): 30
+
+Cold membership: 0
+Warm membership: 1
+Hot membership: 0.5
+Fan speed: 70 %
+
+
+Explanation
+A Fuzzy Logic Controller (FLC) controls fan speed according to the room temperature. Fuzzification converts the temperature into membership values for Cold, Warm, and Hot. Fuzzy rules determine the fan speed: low temperature gives low speed, medium temperature gives moderate speed, and high temperature gives high speed. The controller then displays the calculated fan speed. This is a simplified simulation using temperature-based rules, not a complete fuzzy inference system.
+
+Result: A basic fuzzy logic controller for automatic fan speed control is designed and simulated.
+
 
 </pre>
     </div>
+
+    <div class="code-container">
+        <div class="code-header">
+            <h2>Evolutionary Algorithm such as Genetic Algorithm</h2>
+            <button class="copy-btn" onclick="copyCode('code10', this)">
+                Copy Code
+            </button>
+        </div>
+
+        <pre class="hidden-code" id="code10">
+
+import random
+
+# Fitness function
+def fitness(x):
+    return x * x
+
+# Initial population
+population = [random.randint(0, 10) for _ in range(4)]
+
+for i in range(10):
+    population.sort(key=fitness, reverse=True)
+
+    # Selection
+    parent1 = population[0]
+    parent2 = population[1]
+
+    # Crossover
+    child = (parent1 + parent2) // 2
+
+    # Mutation
+    if random.random() < 0.3:
+        child = random.randint(0, 10)
+
+    population[-1] = child
+
+best = max(population, key=fitness)
+
+print("Best solution:", best)
+print("Maximum fitness:", fitness(best))
+
+Best solution: 10
+Maximum fitness: 100
+
+
+Explanation
+A Genetic Algorithm (GA) is an evolutionary optimization technique inspired by natural selection. The population contains possible solutions, and the fitness function evaluates each solution. Selection chooses the best parents, crossover combines them to produce a child, and mutation introduces random changes to maintain diversity. These steps repeat for several generations to find a good solution.
+
+Result: A Genetic Algorithm is implemented to find a solution with high fitness.
+
+
+
+
+</pre>
+    </div>
+
+    <div class="code-container">
+        <div class="code-header">
+            <h2>Create aAI Agent </h2>
+            <button class="copy-btn" onclick="copyCode('code10', this)">
+                Copy Code
+            </button>
+        </div>
+
+        <pre class="hidden-code" id="code10">
+
+from langchain_openai import ChatOpenAI
+
+# Create AI model
+model = ChatOpenAI(model="gpt-4.1-mini")
+
+# Take user input
+question = input("Enter your question: ")
+
+# Automate response
+response = model.invoke(question)
+
+print("AI Agent:", response.content)
+
+#pip install langchain-openai
+
+Enter your question: Suggest 3 tasks to organize my study schedule.
+
+AI Agent: 1. Create a daily study timetable.
+2. Prioritize difficult subjects.
+3. Review your progress every evening.
+
+Explanation
+An AI agent uses an AI model to process input and produce a useful response. LangChain connects Python applications with language models, ChatOpenAI initializes the model, input() accepts the user's query, and invoke() sends the query to the model. The response is displayed using response.content. This is a basic AI-powered application; a full automation agent would also use tools to perform actions such as sending emails or updating files.
+
+Result: A basic AI-powered assistant is implemented using LangChain and Python.
+
+</pre>
+    </div>
+
+    
 
 
 
