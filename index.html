@@ -70,384 +70,150 @@
     <!-- First Python Code -->
     <div class="code-container">
         <div class="code-header">
-            <h2>PEAS</h2>
+            <h2>Schedule a Project Plan-Ewaste </h2>
             <button class="copy-btn" onclick="copyCode('code1', this)">
                 Copy Code
             </button>
         </div>
 
-        <pre class="hidden-code" id="code1">NO</pre>
+        <pre class="hidden-code" id="code1">
+            1. Tools required
+- Trello — project management
+- Web browser and internet connection
+2. Project 1: E-Waste Recycler Finder
+Objective: Develop a system that helps users locate nearby e-waste recyclers and find recycling facility details.
+Performance steps
+Step 1: Create a board
+1. Open Trello and log in.
+2. Click Create → Create board.
+3. Enter E-Waste Recycler Finder.
+4. Create the board.
+Step 2: Create lists
+
+Create these four lists: To Do, In Progress, Review, and Done.
+
+Step 3: Add cards
+
+Under the To Do list, click Add a card and create these seven cards.
+Task name	Schedule	Assigned role
+Requirement Analysis	Week 1	Analyst
+UI/UX Design	Week 1	UI Designer
+Database Design	Week 2	Backend Developer
+Recycler Location Finder	Week 2	Developer
+Frontend Development	Week 3	Frontend Developer
+Testing and Debugging	Week 4	Tester
+Deployment and Documentation	Week 4	Project Team
+
+Step 4: Set deadlines
+1. Open each card.
+2. Click Dates.
+3. Select the due date from the calendar.
+4. Confirm the date.
+Choose dates covering four weeks.
+
+Step 5: Add descriptions
+
+Open each card, expand Description, and enter a short task description. For example:
+- Requirement Analysis: Identify system objectives and user requirements.
+- Database Design: Design tables for users, recyclers, and locations.
+- Recycler Location Finder: Implement the search for nearby recycling facilities.
+- Testing and Debugging: Test features and fix errors.
+Step 6: Track progress
+
+Move cards between lists as work progresses:
+
+To Do → In Progress → Review → Done
+
+Step 7: Verify the board
+
+Check that every task has an appropriate deadline and that the project activities are organized correctly.
+        </pre>
     </div>
 
     <div class="code-container">
         <div class="code-header">
-            <h2>Expert system</h2>
+            <h2>Schedule a Project Plan-Mental Health</h2>
             <button class="copy-btn" onclick="copyCode('code2', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code2">
-NO
+Step 1: Create a second board
+1. Return to your Trello workspace.
+2. Click Create → Create board.
+3. Enter Mental Health Management System.
+4. Create the same four lists: To Do, In Progress, Review, and Done.
+Step 2: Add cards
+
+Under the To Do list, create these cards.
+Task name	Schedule	Assigned role
+Requirement Analysis	Week 1	Analyst
+UI/UX Design	Week 1	UI Designer
+Database Design	Week 2	Backend Developer
+User Registration and Login	Week 2	Developer
+Mood Tracking Module	Week 3	Developer
+Appointment and Resource Module	Week 3	Developer
+Testing, Deployment and Documentation	Week 4	Project Team
+
+Step 3: Set deadlines
+
+Open each card, click Dates, and select a due date within the planned four-week period.
+
+Step 4: Add descriptions
+
+Examples:
+- Requirement Analysis: Identify user needs and system requirements.
+- User Registration and Login: Develop secure user authentication.
+- Mood Tracking Module: Allow users to record and review their moods.
+- Appointment and Resource Module: Provide appointment management and access to mental health resources.
+- Testing, Deployment and Documentation: Verify system functionality, deploy the application, and prepare documentation.
+Step 5: Track project progress
+
+Move each card through To Do, In Progress, Review, and Done as work advances.
+
+Step 6: Verify the board
+
+Confirm that all seven tasks have deadlines and are organized according to their current progress.
 </pre>
     </div>
 
     <div class="code-container">
         <div class="code-header">
-            <h2>N QUEEN, 8/15 puzzle, water jug and TSP</h2>
+            <h2>Calculate the Estimated Cost-E-waste</h2>
             <button class="copy-btn" onclick="copyCode('code3', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code3">
-#n queen problem
-n = int(input("Enter number of queens: "))
-board = []
+Aim: To estimate the total project cost by identifying resources, effort, and other expenses for both case studies.
 
-def solve(row):
-    if row == n:
-        print("Solution:", board)
-        return True
+We'll use a simple spreadsheet in Google Sheets or Microsoft Excel to calculate the cost. No Jira or Trello is required for this experiment.
 
-    for col in range(n):
-        if all(col != board[i] and
-               abs(col - board[i]) != row - i
-               for i in range(row)):
-            board.append(col)
+The estimates below are illustrative student-project budgets in Indian rupees (₹), not actual vendor quotations.
 
-            if solve(row + 1):
-                return True
+Resource / activity	Quantity	Rate (₹)	Total (₹)
+Requirements and planning	10 hours	200/hour	2,000
+UI/UX design	12 hours	200/hour	2,400
+Frontend development	25 hours	250/hour	6,250
+Backend development	30 hours	250/hour	7,500
+Database and map integration	15 hours	250/hour	3,750
+Testing and debugging	12 hours	200/hour	2,400
+Deployment and documentation	8 hours	200/hour	1,600
+Hosting and miscellaneous	1 allowance	1,500	1,500
+Total estimated cost			₹27,400
 
-            board.pop()
+In cell D2, enter the formula =B2*C2.
 
-    return False
 
-if not solve(0):
-    print("No solution exists")
 
-Enter number of queens: 4
-Solution: [1, 3, 0, 2]
+Drag the formula down to calculate the other task costs.
 
-Explanation
-Backtracking places queens row by row on the chessboard. The board list stores each queen's column position, while the solve(row) function tries to place a queen in a safe position. The all() function checks column and diagonal conflicts, and abs() calculates the difference between positions. If a position is unsafe, board.pop() removes the last queen and tries another position. If no valid arrangement exists, the program prints No solution exists.
 
-Result: The N-Queen problem is solved using backtracking.
 
+In the total row, use =SUM(D2:D9).
 
-8/15 puzzle problem
-
-from collections import deque
-
-n = int(input("Enter size (3 for 8-puzzle, 4 for 15-puzzle): "))
-size = n * n
-
-print("Enter puzzle numbers (use 0 for blank):")
-start = tuple(map(int, input().split()))
-
-goal = tuple(list(range(1, size)) + [0])
-
-q = deque([(start, [])])
-visited = {start}
-
-while q:
-    state, path = q.popleft()
-
-    if state == goal:
-        print("Solution:")
-        for s in path + [state]:
-            print(s)
-        break
-
-    z = state.index(0)
-
-    for m in [-n, n, -1, 1]:
-        p = z + m
-
-        if 0 <= p < size and not (
-            (m == -1 and z % n == 0) or
-            (m == 1 and z % n == n-1)
-        ):
-            new = list(state)
-            new[z], new[p] = new[p], new[z]
-            new = tuple(new)
-
-            if new not in visited:
-                visited.add(new)
-                q.append((new, path + [state]))
-else:
-    print("No solution found")
-
-
-Enter size (3 for 8-puzzle, 4 for 15-puzzle): 3
-Enter puzzle numbers (use 0 for blank):
-1 2 3 4 0 6 7 5 8
-
-Solution:
-(1, 2, 3, 4, 0, 6, 7, 5, 8)
-(1, 2, 3, 4, 5, 6, 7, 0, 8)
-(1, 2, 3, 4, 5, 6, 7, 8, 0)
-
-Explanation: BFS (Breadth-First Search) explores puzzle states level by level. Queue (deque) stores states to be explored, while the visited set prevents repeated states. The initial state is entered by the user, and the goal state contains numbers in order with 0 representing the blank space. Blank movement swaps 0 with an adjacent number, and the path stores the sequence of states until the goal is reached.
-
-
-water jug problem
-
-from collections import deque
-
-a = int(input("Enter capacity of first jug: "))
-b = int(input("Enter capacity of second jug: "))
-target = int(input("Enter target amount: "))
-
-q = deque([(0, 0)])
-visited = {(0, 0)}
-
-while q:
-    x, y = q.popleft()
-    print(x, y)
-
-    if x == target or y == target:
-        print("Target reached!")
-        break
-
-    states = [
-        (a, y), (x, b), (0, y), (x, 0),
-        (x - min(x, b-y), y + min(x, b-y)),
-        (x + min(y, a-x), y - min(y, a-x))
-    ]
-
-    for s in states:
-        if s not in visited:
-            visited.add(s)
-            q.append(s)
-else:
-    print("Target cannot be measured")
-
-
-Enter capacity of first jug: 4
-Enter capacity of second jug: 3
-Enter target amount: 2
-
-0 0
-4 0
-0 3
-4 3
-1 3
-3 0
-1 0
-3 3
-0 1
-4 2
-Target reached!
-
-Explanation
-BFS (Breadth-First Search) explores possible water-jug states level by level. The queue stores the water amounts in both jugs, and visited prevents repeated states. The states list represents filling, emptying, and transferring water between the jugs. The min() function calculates the maximum transferable amount without overflowing a jug. The process continues until one jug contains the target amount.
-
-Result: The Water Jug problem is solved using BFS.
-
-
-
-Travel salesman problem (TSP)
-
-from itertools import permutations
-
-n = int(input("Enter number of cities: "))
-
-cost = []
-for i in range(n):
-    row = list(map(int, input(f"Enter costs for city {i}: ").split()))
-    cost.append(row)
-
-cities = list(range(1, n))
-min_cost = float('inf')
-
-for p in permutations(cities):
-    path = (0,) + p + (0,)
-    total = 0
-
-    for i in range(n):
-        total += cost[path[i]][path[i+1]]
-
-    if total < min_cost:
-        min_cost = total
-        best_path = path
-
-print("Best route:", best_path)
-print("Minimum cost:", min_cost)
-
-
-Enter number of cities: 4
-Enter costs for city 0: 0 10 15 20
-Enter costs for city 1: 10 0 35 25
-Enter costs for city 2: 15 35 0 30
-Enter costs for city 3: 20 25 30 0
-
-Best route: (0, 1, 3, 2, 0)
-Minimum cost: 80
-
-Explanation
-TSP (Travelling Salesman Problem) finds the minimum-cost route that visits every city once and returns to the starting city. The cost matrix stores travel costs between cities, and permutations() generates all possible visiting orders. The path starts and ends at city 0, while the total variable calculates each route's cost. The min_cost variable stores the lowest cost, and best_path stores the corresponding route.
-
-Result: The Travelling Salesman Problem is solved using brute-force search.
-</pre>
-    </div>
-
-    <div class="code-container">
-        <div class="code-header">
-            <h2>A* Search and Alpha-Beta Pruning</h2>
-            <button class="copy-btn" onclick="copyCode('code4', this)">
-                Copy Code
-            </button>
-        </div>
-
-        <pre class="hidden-code" id="code4">
-A* Search Algorithm
-
-graph = {
-    'A': [('B', 1), ('C', 3)],
-    'B': [('D', 1), ('E', 5)],
-    'C': [('F', 2)],
-    'D': [],
-    'E': [],
-    'F': []
-}
-
-h = {'A': 4, 'B': 2, 'C': 1, 'D': 0, 'E': 0, 'F': 0}
-
-start = input("Enter start node: ")
-goal = input("Enter goal node: ")
-
-open_list = [(h[start], 0, start, [start])]
-
-while open_list:
-    open_list.sort()
-    f, g, node, path = open_list.pop(0)
-
-    if node == goal:
-        print("Path:", path)
-        print("Cost:", g)
-        break
-
-    for neighbour, cost in graph[node]:
-        new_g = g + cost
-        new_f = new_g + h[neighbour]
-        open_list.append((new_f, new_g, neighbour, path + [neighbour]))
-else:
-    print("Path not found")
-
-
-Enter start node: A
-Enter goal node: D
-
-Path: ['A', 'B', 'D']
-Cost: 2
-
-Explanation
-A* Search is an informed search algorithm that finds a path using the evaluation function \(f(n)=g(n)+h(n)\). Here, g(n) represents the actual cost from the start node, h(n) is the estimated cost to the goal, and f(n) is the total estimated cost. The graph stores connected nodes and their costs, while open_list stores nodes waiting to be explored. The algorithm selects the node with the lowest f value until the goal is reached.
-
-Result: A* search is implemented to find a path between two nodes
-
-
-Alpha-Beta 
-
-def alphabeta(depth, index, maximizing, values, alpha, beta):
-    if depth == 2:
-        return values[index]
-
-    if maximizing:
-        best = -999
-
-        for i in range(2):
-            value = alphabeta(depth + 1, index * 2 + i,
-                              False, values, alpha, beta)
-            best = max(best, value)
-            alpha = max(alpha, best)
-
-            if beta <= alpha:
-                break
-
-        return best
-
-    else:
-        best = 999
-
-        for i in range(2):
-            value = alphabeta(depth + 1, index * 2 + i,
-                              True, values, alpha, beta)
-            best = min(best, value)
-            beta = min(beta, best)
-
-            if beta <= alpha:
-                break
-
-        return best
-
-
-values = list(map(int, input("Enter 4 leaf values: ").split()))
-
-answer = alphabeta(0, 0, True, values, -999, 999)
-print("Optimal value:", answer)
-
-
-Enter 4 leaf values: 3 5 6 9
-
-Optimal value: 5/6
-
-Explanation
-Alpha-Beta Pruning improves the Minimax algorithm by avoiding branches that cannot affect the final decision. The maximizing player chooses the maximum value, while the minimizing player chooses the minimum value. alpha stores the best value for the maximizing player, and beta stores the best value for the minimizing player. When beta <= alpha, the remaining branches are pruned because they cannot change the result.
-
-Result: Alpha-Beta pruning is implemented to find the optimal value while reducing unnecessary searches.
-</pre>
-    </div>    
-
-    <!-- Second Python Code -->
-    <div class="code-container">
-        <div class="code-header">
-            <h2>Single Layer Perceptron</h2>
-            <button class="copy-btn" onclick="copyCode('code5', this)">
-                Copy Code
-            </button>
-        </div>
-
-        <pre class="hidden-code" id="code5">
-# AND gate using Perceptron Learning Rule
-
-inputs = [(0, 0), (0, 1), (1, 0), (1, 1)]
-targets = [0, 0, 0, 1]
-
-w1 = 0
-w2 = 0
-bias = 0
-lr = 0.1
-
-for epoch in range(10):
-    for i in range(4):
-        x1, x2 = inputs[i]
-        output = 1 if w1*x1 + w2*x2 + bias > 0 else 0
-        error = targets[i] - output
-
-        w1 += lr * error * x1
-        w2 += lr * error * x2
-        bias += lr * error
-
-print("Predictions:")
-for x1, x2 in inputs:
-    output = 1 if w1*x1 + w2*x2 + bias > 0 else 0
-    print(x1, x2, "=", output)
-
-
-
-Predictions:
-0 0 = 0
-0 1 = 0
-1 0 = 0
-1 1 = 1
-
-
-Explanation
-A single-layer perceptron is a basic artificial neuron used for binary classification. The inputs (x1, x2) are multiplied by weights (w1, w2) and added to the bias. The activation function produces either 0 or 1. The Perceptron Learning Rule updates the weights and bias using the prediction error and learning rate (lr). Training repeats for several epochs until the perceptron learns the AND gate.
-
-Result: A single-layer perceptron is implemented successfully using the Perceptron Learning Rule.
 
 </pre>
     </div>
@@ -455,48 +221,42 @@ Result: A single-layer perceptron is implemented successfully using the Perceptr
     <!-- First Python Code -->
     <div class="code-container">
         <div class="code-header">
-            <h2>Multi Layer Perceptron</h2>
+            <h2>Calculate the Estimated Cost-Mental Health</h2>
             <button class="copy-btn" onclick="copyCode('code6', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code6">
-from sklearn.neural_network import MLPClassifier
 
-# Training data (XOR gate)
-X = [[0, 0], [0, 1], [1, 0], [1, 1]]
-y = [0, 1, 1, 0]
+Aim: To estimate the total project cost by identifying resources, effort, and other expenses for both case studies.
 
-# Create and train MLP
-model = MLPClassifier(
-    hidden_layer_sizes=(4,),
-    activation='relu',
-    solver='lbfgs',
-    max_iter=2000,
-    random_state=1
-)
+We'll use a simple spreadsheet in Google Sheets or Microsoft Excel to calculate the cost. No Jira or Trello is required for this experiment.
 
-model.fit(X, y)
+The estimates below are illustrative student-project budgets in Indian rupees (₹), not actual vendor quotations.
 
-# Predict output
-print("Predictions:")
-for x in X:
-    print(x, "=", model.predict([x])[0])
+Resource / activity	Quantity	Rate (₹)	Total (₹)
+Requirements and planning	10 hours	200/hour	2,000
+UI/UX design	12 hours	200/hour	2,400
+Frontend development	25 hours	250/hour	6,250
+Backend development	30 hours	250/hour	7,500
+Database and authentication	15 hours	250/hour	3,750
+Mood tracking and appointment modules	20 hours	250/hour	5,000
+Testing and privacy checks	15 hours	200/hour	3,000
+Deployment and documentation	8 hours	200/hour	1,600
+Hosting and miscellaneous	1 allowance	1,500	1,500
+Total estimated cost			₹33,000
+
+In cell D2, enter the formula =B2*C2.
 
 
-# pip install scikit-learn
 
-Predictions:
-[0, 0] = 0
-[0, 1] = 1
-[1, 0] = 1
-[1, 1] = 0
+Drag the formula down to calculate the other task costs.
 
-Explanation
-A Multi-Layer Perceptron (MLP) is a neural network containing an input layer, one or more hidden layers, and an output layer. Supervised learning trains the model using input data (X) and their correct labels (y). MLPClassifier creates the neural network, hidden_layer_sizes specifies the hidden layer, and fit() trains the model using backpropagation. Finally, predict() predicts the output for each input.
 
-Result: A Multi-Layer Perceptron is implemented using supervised learning to learn the XOR gate.
+
+In the total row, use =SUM(D2:D9).
+
 
 
 </pre>
@@ -504,93 +264,122 @@ Result: A Multi-Layer Perceptron is implemented using supervised learning to lea
 
     <div class="code-container">
         <div class="code-header">
-            <h2>Kohonen Self-organizing Map or Vector Quantization</h2>
+            <h2>Draw Class diagram using any opensource tool</h2>
             <button class="copy-btn" onclick="copyCode('code7', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code7">
-from sklearn.cluster import KMeans
-
-# Input data
-X = [[1, 2], [2, 3], [3, 4],
-     [8, 9], [9, 8], [10, 10]]
-
-k = int(input("Enter number of clusters: "))
-
-model = KMeans(n_clusters=k, random_state=0, n_init=10)
-model.fit(X)
-
-print("Cluster labels:", model.labels_)
-print("Cluster centers:")
-print(model.cluster_centers_)
+Open draw.io.
 
 
-# pip install scikit-learn
 
-Enter number of clusters: 2
+Select Device to save your diagram locally.
 
-Cluster labels: [1 1 1 0 0 0]
-Cluster centers:
-[[ 9.   9. ]
- [ 2.   3. ]]
 
-Note: Cluster label order may vary.
 
-Explanation
-Unsupervised learning finds patterns in data without predefined output labels. K-Means divides data into a specified number of clusters (k). fit() trains the model by grouping similar data points, labels_ shows the cluster assigned to each point, and cluster_centers_ gives the center of each cluster.
+Choose Create New Diagram → Blank Diagram.
 
-Result: An unsupervised learning algorithm is implemented using K-Means clustering.
 
-</pre>
-    </div>
-    
-    <div class="code-container">
-        <div class="code-header">
-            <h2>Associative memory Network</h2>
-            <button class="copy-btn" onclick="copyCode('code8', this)">
-                Copy Code
-            </button>
-        </div>
 
-        <pre class="hidden-code" id="code8">
-import numpy as np
+Name it E-Waste Recycler Finder Class Diagram.
 
-# Stored patterns
-X = np.array([
-    [1, -1, 1, -1],
-    [-1, 1, -1, 1]
-])
 
-# Create weight matrix
-W = X.T @ X
-np.fill_diagonal(W, 0)
 
-# Take input from user
-x = np.array(list(map(int, input(
-    "Enter 4 values (-1 or 1): ").split())))
+From the shapes panel, enable UML or search for UML Class.
 
-# Recall pattern
-y = np.sign(W @ x)
 
-print("Recalled pattern:", y)
 
-Enter 4 values (-1 or 1): 1 -1 1 -1
+Drag class shapes onto the canvas. Each class has three sections: class name, attributes, and methods.
 
-Recalled pattern: [ 1. -1.  1. -1.]
 
-Explanation
-An Associative Memory Network stores patterns and recalls them when an input is provided. The stored patterns (X) are represented using 1 and -1. The weight matrix (W) stores relationships between pattern elements, and np.fill_diagonal() sets its diagonal values to zero. The recall operation multiplies the weight matrix by the input pattern, while np.sign() converts the result into 1 or -1.
 
-Result: An associative memory network is implemented using a simple Hopfield-style weight matrix.
+Create the following classes and connect them using relationship lines.
+
+E-Waste Recycler Finder Class Diagram:
+
+classDiagram
+    class User {
+        +int userId
+        +string name
+        +string email
+        +searchRecycler()
+        +submitRequest()
+    }
+    class RecyclerCenter {
+        +int centerId
+        +string name
+        +string address
+        +string acceptedWaste
+        +getDetails()
+    }
+    class SearchService {
+        +searchByLocation()
+        +filterByWasteType()
+    }
+    class RecyclingRequest {
+        +int requestId
+        +string wasteType
+        +string status
+        +createRequest()
+        +updateStatus()
+    }
+    User --> SearchService : searches
+    SearchService --> RecyclerCenter : finds
+    User --> RecyclingRequest : submits
+    RecyclingRequest --> RecyclerCenter : sent to
+
+
+Mental Health:
+
+classDiagram
+    class User {
+        +int userId
+        +string name
+        +string email
+        +recordMood()
+        +bookAppointment()
+    }
+    class MoodEntry {
+        +int entryId
+        +string mood
+        +string notes
+        +date entryDate
+        +saveEntry()
+        +viewHistory()
+    }
+    class Appointment {
+        +int appointmentId
+        +date appointmentDate
+        +string status
+        +book()
+        +cancel()
+    }
+    class Therapist {
+        +int therapistId
+        +string name
+        +string specialization
+        +viewAppointments()
+    }
+    class Resource {
+        +int resourceId
+        +string title
+        +string category
+        +viewResource()
+    }
+    User "1" --> "*" MoodEntry : records
+    User "1" --> "*" Appointment : books
+    Therapist "1" --> "*" Appointment : manages
+    User --> Resource : accesses
+
 </pre>
     </div>
     
     <!-- First Python Code -->
     <div class="code-container">
         <div class="code-header">
-            <h2>Fuzzy Membership Function and Fuzzification
+            <h2>Draw Use case diagram using any opensource tool
             </h2>
             <button class="copy-btn" onclick="copyCode('code9', this)">
                 Copy Code
@@ -598,38 +387,63 @@ Result: An associative memory network is implemented using a simple Hopfield-sty
         </div>
 
         <pre class="hidden-code" id="code9">
-x = float(input("Enter temperature (0-40): "))
+EWaste:
 
-# Membership functions
-def cold(x):
-    return max(0, min(1, (20 - x) / 10))
+flowchart LR
+    U(["👤 User"])
+    A(["👤 Admin"])
+    R(["🏢 Recycler Center"])
 
-def warm(x):
-    return max(0, min((x - 10) / 10, (30 - x) / 10, 1))
+    subgraph SYS["E-Waste Recycler Finder System"]
+        UC1(["Search recyclers"])
+        UC2(["View recycler details"])
+        UC3(["Submit recycling request"])
+        UC4(["Track request"])
+        UC5(["Manage recycler listings"])
+        UC6(["Update request status"])
+    end
 
-def hot(x):
-    return max(0, min(1, (x - 20) / 10))
+    U --- UC1
+    U --- UC2
+    U --- UC3
+    U --- UC4
+    A --- UC5
+    A --- UC6
+    R --- UC6
 
-# Fuzzification
-print("Cold:", cold(x))
-print("Warm:", warm(x))
-print("Hot:", hot(x))
 
-Enter temperature (0-40): 25
 
-Cold: 0
-Warm: 0.5
-Hot: 0.5
+Mental Health:
 
-Explanation
-Fuzzy logic represents values with degrees of membership between 0 and 1. A membership function determines how strongly an input belongs to a fuzzy set such as Cold, Warm, or Hot. Fuzzification converts a crisp input, such as a temperature of 25°C, into fuzzy membership values. The min() and max() functions keep membership values within the range 0 to 1.
+flowchart LR
+    U(["👤 User"])
+    T(["👤 Therapist"])
+    A(["👤 Admin"])
 
-Result: Fuzzy membership functions are implemented, and the input temperature is fuzzified.
+    subgraph SYS["Mental Health Management System"]
+        UC1(["Register / Login"])
+        UC2(["Record Mood"])
+        UC3(["View Mood History"])
+        UC4(["Book Appointment"])
+        UC5(["Access Resources"])
+        UC6(["Manage Appointments"])
+        UC7(["Manage Users"])
+    end
+
+    U --- UC1
+    U --- UC2
+    U --- UC3
+    U --- UC4
+    U --- UC5
+    T --- UC6
+    A --- UC7
+    A --- UC6
+
     </div>
 
     <div class="code-container">
         <div class="code-header">
-            <h2>Fuzzy Logic Controller</h2>
+            <h2>Draw DFD (Level 0, 1, 2) for case study using any opensource tool</h2>
             <button class="copy-btn" onclick="copyCode('code10', this)">
                 Copy Code
             </button>
@@ -637,41 +451,64 @@ Result: Fuzzy membership functions are implemented, and the input temperature is
 
         <pre class="hidden-code" id="code10">
 
-temp = float(input("Enter temperature (0-40): "))
+Ewaste:
+Level 0:
 
-# Fuzzification
-cold = max(0, min(1, (25 - temp) / 10))
-warm = max(0, min(1, (temp - 15) / 10))
-hot = max(0, min(1, (temp - 25) / 10))
-
-# Fuzzy rules
-if temp <= 15:
-    speed = 0
-elif temp <= 25:
-    speed = 40
-elif temp <= 35:
-    speed = 70
-else:
-    speed = 100
-
-# Output
-print("Cold membership:", round(cold, 2))
-print("Warm membership:", round(warm, 2))
-print("Hot membership:", round(hot, 2))
-print("Fan speed:", speed, "%")
-
-Enter temperature (0-40): 30
-
-Cold membership: 0
-Warm membership: 1
-Hot membership: 0.5
-Fan speed: 70 %
+flowchart LR
+    U[User] -->|Location and waste type| S((E-Waste Recycler Finder))
+    S -->|Recycler details| U
 
 
-Explanation
-A Fuzzy Logic Controller (FLC) controls fan speed according to the room temperature. Fuzzification converts the temperature into membership values for Cold, Warm, and Hot. Fuzzy rules determine the fan speed: low temperature gives low speed, medium temperature gives moderate speed, and high temperature gives high speed. The controller then displays the calculated fan speed. This is a simplified simulation using temperature-based rules, not a complete fuzzy inference system.
+Level 1:
 
-Result: A basic fuzzy logic controller for automatic fan speed control is designed and simulated.
+flowchart LR
+    U[User] --> P1((Search Recycler))
+    P1 <--> D[(Recycler Database)]
+    P1 -->|Results| U
+    U --> P2((Submit Request))
+    P2 --> R[Recycler Center]
+
+Level 2:
+
+flowchart LR
+    U[User] --> P1((Enter Location))
+    P1 --> P2((Filter Recyclers))
+    D[(Recycler Database)] --> P2
+    P2 --> P3((Display Results))
+    P3 --> U
+
+
+Mental Health:
+Level 0:
+
+
+flowchart LR
+    U[User] -->|Mood and appointment details| S((Mental Health System))
+    S -->|Mood history and confirmation| U
+
+Level 1:
+
+flowchart LR
+    U[User] --> P1((Record Mood))
+    P1 <--> D1[(Mood Database)]
+    P1 -->|Mood history| U
+    U --> P2((Book Appointment))
+    P2 <--> D2[(Appointment Database)]
+    P2 --> T[Therapist]
+
+
+Level 2:
+
+flowchart LR
+    U[User] --> P1((Enter Mood))
+    P1 --> P2((Validate Entry))
+    P2 --> P3((Save Mood))
+    P3 --> D[(Mood Database)]
+    D --> P4((Display History))
+    P4 --> U
+
+
+
 
 
 </pre>
@@ -679,52 +516,13 @@ Result: A basic fuzzy logic controller for automatic fan speed control is design
 
     <div class="code-container">
         <div class="code-header">
-            <h2>Evolutionary Algorithm such as Genetic Algorithm</h2>
+            <h2>Develop Activity diagram for the project using any opensource tool</h2>
             <button class="copy-btn" onclick="copyCode('code10', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code10">
-
-import random
-
-# Fitness function
-def fitness(x):
-    return x * x
-
-# Initial population
-population = [random.randint(0, 10) for _ in range(4)]
-
-for i in range(10):
-    population.sort(key=fitness, reverse=True)
-
-    # Selection
-    parent1 = population[0]
-    parent2 = population[1]
-
-    # Crossover
-    child = (parent1 + parent2) // 2
-
-    # Mutation
-    if random.random() < 0.3:
-        child = random.randint(0, 10)
-
-    population[-1] = child
-
-best = max(population, key=fitness)
-
-print("Best solution:", best)
-print("Maximum fitness:", fitness(best))
-
-Best solution: 10
-Maximum fitness: 100
-
-
-Explanation
-A Genetic Algorithm (GA) is an evolutionary optimization technique inspired by natural selection. The population contains possible solutions, and the fitness function evaluates each solution. Selection chooses the best parents, crossover combines them to produce a child, and mutation introduces random changes to maintain diversity. These steps repeat for several generations to find a good solution.
-
-Result: A Genetic Algorithm is implemented to find a solution with high fitness.
 
 
 
