@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Code for Numbers</title>
+    <title>AI Practical Cards</title>
 
     <style>
         * {
@@ -14,19 +14,27 @@
         }
 
         body {
-            background: #000000;
-            color: #ffffff;
+            background: #000;
+            color: #fff;
             font-family: Arial, sans-serif;
             padding: 30px;
         }
 
         .code-container {
             background: #0a0a0a;
-            border: 1px solid #333333;
+            border: 1px solid #333;
             border-radius: 8px;
             max-width: 900px;
             margin: 0 auto 15px;
             overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .code-container:hover,
+        .code-container:focus-visible {
+            border-color: #777;
+            outline: none;
         }
 
         .code-header {
@@ -35,267 +43,311 @@
             align-items: center;
             gap: 15px;
             padding: 16px 20px;
-            background: #111111;
+            background: #111;
         }
 
         .code-header h2 {
             font-size: 17px;
             font-weight: 600;
-            color: #ffffff;
+            color: #fff;
+        }
+
+        .code-header h2::after {
+            content: " +";
+            color: #aaa;
+            font-weight: normal;
+        }
+
+        .code-container.expanded .code-header h2::after {
+            content: " −";
         }
 
         .copy-btn {
-            background: #222222;
-            color: #ffffff;
-            border: 1px solid #444444;
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
             padding: 8px 14px;
             border-radius: 5px;
             cursor: pointer;
             white-space: nowrap;
+            position: relative;
+            z-index: 1;
         }
 
         .copy-btn:hover {
-            background: #333333;
+            background: #333;
         }
 
-        /* Keep code hidden */
         .hidden-code {
             display: none;
+            margin: 0;
+            padding: 20px;
+            color: #e8e8e8;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            overflow-x: auto;
+            border-top: 1px solid #333;
+        }
+
+        .code-container.expanded .hidden-code {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+
+            .code-header {
+                padding: 13px;
+                gap: 10px;
+            }
+
+            .code-header h2 {
+                font-size: 15px;
+            }
+
+            .hidden-code {
+                padding: 14px;
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- First Python Code -->
-    <div class="code-container">
+    <!-- 1 -->
+    <div class="code-container" tabindex="0" role="group"
+         aria-expanded="false"
+         onclick="toggleCard(this)"
+         onkeydown="handleCardKey(event, this)">
+
         <div class="code-header">
-            <h2>Schedule a Project Plan-Ewaste </h2>
-            <button class="copy-btn" onclick="copyCode('code1', this)">
+            <h2>1. Schedule a Project Plan - E-Waste</h2>
+            <button class="copy-btn"
+                onclick="event.stopPropagation(); copyCode('code1', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code1">
-            1. Tools required
-- Trello — project management
+Tools required:
+- Trello
 - Web browser and internet connection
-2. Project 1: E-Waste Recycler Finder
-Objective: Develop a system that helps users locate nearby e-waste recyclers and find recycling facility details.
-Performance steps
+
+Project: E-Waste Recycler Finder
+
+Objective:
+Develop a system that helps users locate nearby e-waste recyclers.
+
+Performance steps:
+
 Step 1: Create a board
 1. Open Trello and log in.
 2. Click Create → Create board.
 3. Enter E-Waste Recycler Finder.
 4. Create the board.
-Step 2: Create lists
 
-Create these four lists: To Do, In Progress, Review, and Done.
+Step 2: Create lists
+Create four lists:
+To Do, In Progress, Review, and Done.
 
 Step 3: Add cards
-
-Under the To Do list, click Add a card and create these seven cards.
-Task name	Schedule	Assigned role
-Requirement Analysis	Week 1	Analyst
-UI/UX Design	Week 1	UI Designer
-Database Design	Week 2	Backend Developer
-Recycler Location Finder	Week 2	Developer
-Frontend Development	Week 3	Frontend Developer
-Testing and Debugging	Week 4	Tester
-Deployment and Documentation	Week 4	Project Team
+Create these seven cards:
+- Requirement Analysis — Week 1 — Analyst
+- UI/UX Design — Week 1 — UI Designer
+- Database Design — Week 2 — Backend Developer
+- Recycler Location Finder — Week 2 — Developer
+- Frontend Development — Week 3 — Frontend Developer
+- Testing and Debugging — Week 4 — Tester
+- Deployment and Documentation — Week 4 — Project Team
 
 Step 4: Set deadlines
-1. Open each card.
-2. Click Dates.
-3. Select the due date from the calendar.
-4. Confirm the date.
+Open each card, click Dates, select a due date, and confirm it.
 Choose dates covering four weeks.
 
 Step 5: Add descriptions
-
-Open each card, expand Description, and enter a short task description. For example:
+Examples:
 - Requirement Analysis: Identify system objectives and user requirements.
 - Database Design: Design tables for users, recyclers, and locations.
-- Recycler Location Finder: Implement the search for nearby recycling facilities.
+- Recycler Location Finder: Implement nearby facility search.
 - Testing and Debugging: Test features and fix errors.
+
 Step 6: Track progress
-
-Move cards between lists as work progresses:
-
+Move cards through:
 To Do → In Progress → Review → Done
 
 Step 7: Verify the board
-
-Check that every task has an appropriate deadline and that the project activities are organized correctly.
+Check that every task has a deadline and is organized correctly.
         </pre>
     </div>
 
-    <div class="code-container">
+    <!-- 2 -->
+    <div class="code-container" tabindex="0" role="group"
+         aria-expanded="false"
+         onclick="toggleCard(this)"
+         onkeydown="handleCardKey(event, this)">
+
         <div class="code-header">
-            <h2>Schedule a Project Plan-Mental Health</h2>
-            <button class="copy-btn" onclick="copyCode('code2', this)">
+            <h2>2. Schedule a Project Plan - Mental Health</h2>
+            <button class="copy-btn"
+                onclick="event.stopPropagation(); copyCode('code2', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code2">
-Step 1: Create a second board
-1. Return to your Trello workspace.
+Project: Mental Health Management System
+
+Step 1: Create a board
+1. Open your Trello workspace.
 2. Click Create → Create board.
 3. Enter Mental Health Management System.
-4. Create the same four lists: To Do, In Progress, Review, and Done.
-Step 2: Add cards
+4. Create four lists: To Do, In Progress, Review, and Done.
 
-Under the To Do list, create these cards.
-Task name	Schedule	Assigned role
-Requirement Analysis	Week 1	Analyst
-UI/UX Design	Week 1	UI Designer
-Database Design	Week 2	Backend Developer
-User Registration and Login	Week 2	Developer
-Mood Tracking Module	Week 3	Developer
-Appointment and Resource Module	Week 3	Developer
-Testing, Deployment and Documentation	Week 4	Project Team
+Step 2: Add cards
+- Requirement Analysis — Week 1 — Analyst
+- UI/UX Design — Week 1 — UI Designer
+- Database Design — Week 2 — Backend Developer
+- User Registration and Login — Week 2 — Developer
+- Mood Tracking Module — Week 3 — Developer
+- Appointment and Resource Module — Week 3 — Developer
+- Testing, Deployment and Documentation — Week 4 — Project Team
 
 Step 3: Set deadlines
-
-Open each card, click Dates, and select a due date within the planned four-week period.
+Open each card, click Dates, and select a due date within four weeks.
 
 Step 4: Add descriptions
-
-Examples:
 - Requirement Analysis: Identify user needs and system requirements.
 - User Registration and Login: Develop secure user authentication.
-- Mood Tracking Module: Allow users to record and review their moods.
-- Appointment and Resource Module: Provide appointment management and access to mental health resources.
-- Testing, Deployment and Documentation: Verify system functionality, deploy the application, and prepare documentation.
-Step 5: Track project progress
+- Mood Tracking Module: Allow users to record and review moods.
+- Appointment and Resource Module: Manage appointments and provide mental health resources.
+- Testing and Deployment: Verify and deploy the system.
 
-Move each card through To Do, In Progress, Review, and Done as work advances.
+Step 5: Track progress
+Move cards through To Do, In Progress, Review, and Done.
 
 Step 6: Verify the board
-
-Confirm that all seven tasks have deadlines and are organized according to their current progress.
-</pre>
+Confirm that all seven tasks have deadlines and are organized correctly.
+        </pre>
     </div>
 
-    <div class="code-container">
+    <!-- 3 -->
+    <div class="code-container" tabindex="0" role="group"
+         aria-expanded="false"
+         onclick="toggleCard(this)"
+         onkeydown="handleCardKey(event, this)">
+
         <div class="code-header">
-            <h2>Calculate the Estimated Cost-E-waste</h2>
-            <button class="copy-btn" onclick="copyCode('code3', this)">
+            <h2>3. Calculate Estimated Cost - E-Waste</h2>
+            <button class="copy-btn"
+                onclick="event.stopPropagation(); copyCode('code3', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code3">
-Aim: To estimate the total project cost by identifying resources, effort, and other expenses for both case studies.
+Aim:
+Estimate the total project cost by identifying resources, effort, and expenses.
 
-We'll use a simple spreadsheet in Google Sheets or Microsoft Excel to calculate the cost. No Jira or Trello is required for this experiment.
+Tool:
+Google Sheets or Microsoft Excel.
 
-The estimates below are illustrative student-project budgets in Indian rupees (₹), not actual vendor quotations.
+The following is an illustrative student-project budget in Indian rupees.
 
-Resource / activity	Quantity	Rate (₹)	Total (₹)
-Requirements and planning	10 hours	200/hour	2,000
-UI/UX design	12 hours	200/hour	2,400
-Frontend development	25 hours	250/hour	6,250
-Backend development	30 hours	250/hour	7,500
-Database and map integration	15 hours	250/hour	3,750
-Testing and debugging	12 hours	200/hour	2,400
-Deployment and documentation	8 hours	200/hour	1,600
-Hosting and miscellaneous	1 allowance	1,500	1,500
-Total estimated cost			₹27,400
+Resource / Activity             Quantity       Rate          Total
+Requirements and planning       10 hours       ₹200/hour     ₹2,000
+UI/UX design                    12 hours       ₹200/hour     ₹2,400
+Frontend development            25 hours       ₹250/hour     ₹6,250
+Backend development             30 hours       ₹250/hour     ₹7,500
+Database and map integration    15 hours       ₹250/hour     ₹3,750
+Testing and debugging           12 hours       ₹200/hour     ₹2,400
+Deployment and documentation    8 hours        ₹200/hour     ₹1,600
+Hosting and miscellaneous       1 allowance    ₹1,500        ₹1,500
 
-In cell D2, enter the formula =B2*C2.
+Total estimated cost: ₹27,400
 
-
-
-Drag the formula down to calculate the other task costs.
-
-
-
-In the total row, use =SUM(D2:D9).
-
-
-</pre>
+Steps:
+1. Enter the resource, quantity, and rate in the spreadsheet.
+2. In cell D2, enter =B2*C2.
+3. Drag the formula down to calculate the other task costs.
+4. In the total row, use =SUM(D2:D9).
+        </pre>
     </div>
 
-    <!-- First Python Code -->
-    <div class="code-container">
+    <!-- 4 -->
+    <div class="code-container" tabindex="0" role="group"
+         aria-expanded="false"
+         onclick="toggleCard(this)"
+         onkeydown="handleCardKey(event, this)">
+
         <div class="code-header">
-            <h2>Calculate the Estimated Cost-Mental Health</h2>
-            <button class="copy-btn" onclick="copyCode('code4', this)">
+            <h2>4. Calculate Estimated Cost - Mental Health</h2>
+            <button class="copy-btn"
+                onclick="event.stopPropagation(); copyCode('code4', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code4">
+Aim:
+Estimate the total project cost by identifying resources, effort, and expenses.
 
-Aim: To estimate the total project cost by identifying resources, effort, and other expenses for both case studies.
+Tool:
+Google Sheets or Microsoft Excel.
 
-We'll use a simple spreadsheet in Google Sheets or Microsoft Excel to calculate the cost. No Jira or Trello is required for this experiment.
+The following is an illustrative student-project budget in Indian rupees.
 
-The estimates below are illustrative student-project budgets in Indian rupees (₹), not actual vendor quotations.
+Resource / Activity                   Quantity       Rate          Total
+Requirements and planning             10 hours       ₹200/hour     ₹2,000
+UI/UX design                          12 hours       ₹200/hour     ₹2,400
+Frontend development                  25 hours       ₹250/hour     ₹6,250
+Backend development                   30 hours       ₹250/hour     ₹7,500
+Database and authentication           15 hours       ₹250/hour     ₹3,750
+Mood and appointment modules          20 hours       ₹250/hour     ₹5,000
+Testing and privacy checks            15 hours       ₹200/hour     ₹3,000
+Deployment and documentation          8 hours        ₹200/hour     ₹1,600
+Hosting and miscellaneous             1 allowance    ₹1,500        ₹1,500
 
-Resource / activity	Quantity	Rate (₹)	Total (₹)
-Requirements and planning	10 hours	200/hour	2,000
-UI/UX design	12 hours	200/hour	2,400
-Frontend development	25 hours	250/hour	6,250
-Backend development	30 hours	250/hour	7,500
-Database and authentication	15 hours	250/hour	3,750
-Mood tracking and appointment modules	20 hours	250/hour	5,000
-Testing and privacy checks	15 hours	200/hour	3,000
-Deployment and documentation	8 hours	200/hour	1,600
-Hosting and miscellaneous	1 allowance	1,500	1,500
-Total estimated cost			₹33,000
+Total estimated cost: ₹33,000
 
-In cell D2, enter the formula =B2*C2.
-
-
-
-Drag the formula down to calculate the other task costs.
-
-
-
-In the total row, use =SUM(D2:D9).
-
-
-
-</pre>
+Steps:
+1. Enter resource, quantity, and rate in the spreadsheet.
+2. In cell D2, enter =B2*C2.
+3. Drag the formula down to calculate the other task costs.
+4. In the total row, use =SUM(D2:D9).
+        </pre>
     </div>
 
-    <div class="code-container">
+    <!-- 5 -->
+    <div class="code-container" tabindex="0" role="group"
+         aria-expanded="false"
+         onclick="toggleCard(this)"
+         onkeydown="handleCardKey(event, this)">
+
         <div class="code-header">
-            <h2>Draw Class diagram using any opensource tool</h2>
-            <button class="copy-btn" onclick="copyCode('code5', this)">
+            <h2>5. Draw Class Diagram</h2>
+            <button class="copy-btn"
+                onclick="event.stopPropagation(); copyCode('code5', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code5">
-Open draw.io.
+Tool: draw.io
 
-
-
-Select Device to save your diagram locally.
-
-
-
-Choose Create New Diagram → Blank Diagram.
-
-
-
-Name it E-Waste Recycler Finder Class Diagram.
-
-
-
-From the shapes panel, enable UML or search for UML Class.
-
-
-
-Drag class shapes onto the canvas. Each class has three sections: class name, attributes, and methods.
-
-
-
-Create the following classes and connect them using relationship lines.
+Steps:
+1. Open draw.io.
+2. Select Device to save the diagram locally.
+3. Choose Create New Diagram → Blank Diagram.
+4. Name it E-Waste Recycler Finder Class Diagram.
+5. Enable UML or search for UML Class.
+6. Add class shapes containing class names, attributes, and methods.
+7. Connect the classes using relationship lines.
 
 E-Waste Recycler Finder Class Diagram:
 
@@ -307,6 +359,7 @@ classDiagram
         +searchRecycler()
         +submitRequest()
     }
+
     class RecyclerCenter {
         +int centerId
         +string name
@@ -314,10 +367,12 @@ classDiagram
         +string acceptedWaste
         +getDetails()
     }
+
     class SearchService {
         +searchByLocation()
         +filterByWasteType()
     }
+
     class RecyclingRequest {
         +int requestId
         +string wasteType
@@ -325,13 +380,13 @@ classDiagram
         +createRequest()
         +updateStatus()
     }
+
     User --> SearchService : searches
     SearchService --> RecyclerCenter : finds
     User --> RecyclingRequest : submits
     RecyclingRequest --> RecyclerCenter : sent to
 
-
-Mental Health:
+Mental Health Management System:
 
 classDiagram
     class User {
@@ -341,6 +396,7 @@ classDiagram
         +recordMood()
         +bookAppointment()
     }
+
     class MoodEntry {
         +int entryId
         +string mood
@@ -349,6 +405,7 @@ classDiagram
         +saveEntry()
         +viewHistory()
     }
+
     class Appointment {
         +int appointmentId
         +date appointmentDate
@@ -356,43 +413,49 @@ classDiagram
         +book()
         +cancel()
     }
+
     class Therapist {
         +int therapistId
         +string name
         +string specialization
         +viewAppointments()
     }
+
     class Resource {
         +int resourceId
         +string title
         +string category
         +viewResource()
     }
+
     User "1" --> "*" MoodEntry : records
     User "1" --> "*" Appointment : books
     Therapist "1" --> "*" Appointment : manages
     User --> Resource : accesses
-
-</pre>
+        </pre>
     </div>
-    
-    <!-- First Python Code -->
-    <div class="code-container">
+
+    <!-- 6 -->
+    <div class="code-container" tabindex="0" role="group"
+         aria-expanded="false"
+         onclick="toggleCard(this)"
+         onkeydown="handleCardKey(event, this)">
+
         <div class="code-header">
-            <h2>Draw Use case diagram using any opensource tool
-            </h2>
-            <button class="copy-btn" onclick="copyCode('code6', this)">
+            <h2>6. Draw Use Case Diagram</h2>
+            <button class="copy-btn"
+                onclick="event.stopPropagation(); copyCode('code6', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code6">
-EWaste:
+E-Waste Recycler Finder:
 
 flowchart LR
-    U(["👤 User"])
-    A(["👤 Admin"])
-    R(["🏢 Recycler Center"])
+    U(["User"])
+    A(["Admin"])
+    R(["Recycler Center"])
 
     subgraph SYS["E-Waste Recycler Finder System"]
         UC1(["Search recyclers"])
@@ -411,14 +474,12 @@ flowchart LR
     A --- UC6
     R --- UC6
 
-
-
-Mental Health:
+Mental Health Management System:
 
 flowchart LR
-    U(["👤 User"])
-    T(["👤 Therapist"])
-    A(["👤 Admin"])
+    U(["User"])
+    T(["Therapist"])
+    A(["Admin"])
 
     subgraph SYS["Mental Health Management System"]
         UC1(["Register / Login"])
@@ -438,29 +499,32 @@ flowchart LR
     T --- UC6
     A --- UC7
     A --- UC6
-
+        </pre>
     </div>
 
-    <div class="code-container">
+    <!-- 7 -->
+    <div class="code-container" tabindex="0" role="group"
+         aria-expanded="false"
+         onclick="toggleCard(this)"
+         onkeydown="handleCardKey(event, this)">
+
         <div class="code-header">
-            <h2>Draw DFD (Level 0, 1, 2) for case study using any opensource tool</h2>
-            <button class="copy-btn" onclick="copyCode('code7', this)">
+            <h2>7. Draw DFD - Level 0, 1, and 2</h2>
+            <button class="copy-btn"
+                onclick="event.stopPropagation(); copyCode('code7', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code7">
+E-Waste Recycler Finder:
 
-Ewaste:
-Level 0:    
-
+Level 0:
 flowchart LR
     U[User] -->|Location and waste type| S((E-Waste Recycler Finder))
     S -->|Recycler details| U
 
-
 Level 1:
-
 flowchart LR
     U[User] --> P1((Search Recycler))
     P1 <--> D[(Recycler Database)]
@@ -469,7 +533,6 @@ flowchart LR
     P2 --> R[Recycler Center]
 
 Level 2:
-
 flowchart LR
     U[User] --> P1((Enter Location))
     P1 --> P2((Filter Recyclers))
@@ -477,17 +540,14 @@ flowchart LR
     P2 --> P3((Display Results))
     P3 --> U
 
+Mental Health Management System:
 
-Mental Health:
 Level 0:
-
-
 flowchart LR
     U[User] -->|Mood and appointment details| S((Mental Health System))
     S -->|Mood history and confirmation| U
 
 Level 1:
-
 flowchart LR
     U[User] --> P1((Record Mood))
     P1 <--> D1[(Mood Database)]
@@ -496,9 +556,7 @@ flowchart LR
     P2 <--> D2[(Appointment Database)]
     P2 --> T[Therapist]
 
-
 Level 2:
-
 flowchart LR
     U[User] --> P1((Enter Mood))
     P1 --> P2((Validate Entry))
@@ -506,26 +564,25 @@ flowchart LR
     P3 --> D[(Mood Database)]
     D --> P4((Display History))
     P4 --> U
-
-
-
-
-
-</pre>
+        </pre>
     </div>
 
-    <div class="code-container">
+    <!-- 8 -->
+    <div class="code-container" tabindex="0" role="group"
+         aria-expanded="false"
+         onclick="toggleCard(this)"
+         onkeydown="handleCardKey(event, this)">
+
         <div class="code-header">
-            <h2>Develop Activity diagram for the project using any opensource tool</h2>
-            <button class="copy-btn" onclick="copyCode('code8', this)">
+            <h2>8. Develop Activity Diagram</h2>
+            <button class="copy-btn"
+                onclick="event.stopPropagation(); copyCode('code8', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code8">
-
-
-Ewaste:
+E-Waste Recycler Finder:
 
 flowchart TD
     A([Start]) --> B[Open Application]
@@ -540,8 +597,7 @@ flowchart TD
     I --> K([End])
     J --> K
 
-
-Mental Health:
+Mental Health Management System:
 
 flowchart TD
     A([Start]) --> B[Open Application]
@@ -557,22 +613,25 @@ flowchart TD
     J --> K[Confirm Appointment]
     I --> L([End])
     K --> L
-
-
-</pre>
+        </pre>
     </div>
 
-    <div class="code-container">
+    <!-- 9 -->
+    <div class="code-container" tabindex="0" role="group"
+         aria-expanded="false"
+         onclick="toggleCard(this)"
+         onkeydown="handleCardKey(event, this)">
+
         <div class="code-header">
-            <h2>Develop State transition diagram for the project using any opensource tool</h2>
-            <button class="copy-btn" onclick="copyCode('code9', this)">
+            <h2>9. Develop State Transition Diagram</h2>
+            <button class="copy-btn"
+                onclick="event.stopPropagation(); copyCode('code9', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code9">
-
-Ewaste:
+E-Waste Recycler Finder:
 
 stateDiagram-v2
     [*] --> Created
@@ -584,8 +643,7 @@ stateDiagram-v2
     Rejected --> [*]
     Completed --> [*]
 
-
-Mental Health:
+Mental Health Management System:
 
 stateDiagram-v2
     [*] --> Requested
@@ -598,97 +656,116 @@ stateDiagram-v2
     Confirmed --> Cancelled : Appointment cancelled
     Cancelled --> [*]
     Completed --> [*]
-
-
-</pre>
+        </pre>
     </div>
 
-    <div class="code-container">
+    <!-- 10 -->
+    <div class="code-container" tabindex="0" role="group"
+         aria-expanded="false"
+         onclick="toggleCard(this)"
+         onkeydown="handleCardKey(event, this)">
+
         <div class="code-header">
-            <h2>Explore agile methodology tools (Jira or Trello)</h2>
-            <button class="copy-btn" onclick="copyCode('code10', this)">
+            <h2>10. Explore Agile Methodology Tools</h2>
+            <button class="copy-btn"
+                onclick="event.stopPropagation(); copyCode('code10', this)">
                 Copy Code
             </button>
         </div>
 
         <pre class="hidden-code" id="code10">
+Aim:
+Explore an Agile project management tool and manage project tasks using an Agile workflow.
 
-Aim: To explore an Agile project management tool and manage project tasks using an Agile workflow.
+Tool:
+Trello — beginner-friendly and suitable for this practical.
 
-Tool: Trello — beginner-friendly, online, and suitable for this practical.
+Theory:
+Agile develops a project in small steps with continuous feedback and regular improvements. Trello organizes tasks using boards, lists, and cards.
 
-Theory: Agile is a software development approach in which a project is developed in small steps, with continuous feedback and regular improvements. Trello helps teams organize tasks and track their progress using boards, lists, and cards.
 Project 1: E-Waste Recycler Finder
-Objective: Develop a system to find nearby e-waste recyclers.
-Performance steps
+
+Objective:
+Develop a system to find nearby e-waste recyclers.
+
+Steps:
 1. Open Trello and log in.
-2. Create a board named E-Waste Recycler Finder – Agile.
-3. Create four lists: Product Backlog, To Do, In Progress, and Done.
-4. Add the following cards to the Product Backlog.
-Task card	Priority
-User registration and login	High
-Search recyclers by location	High
-View recycler details	High
-Submit recycling request	Medium
-Track recycling request	Medium
-Admin manages recycler listings	Low
-
-5. Select the first three high-priority tasks for your first sprint.
-6. Move selected cards to To Do.
-7. Start work by moving a card to In Progress.
-8. After completing and checking a task, move it to Done.
-
-
-
+2. Create a board named E-Waste Recycler Finder - Agile.
+3. Create lists: Product Backlog, To Do, In Progress, and Done.
+4. Add these cards to the Product Backlog:
+   - User registration and login — High
+   - Search recyclers by location — High
+   - View recycler details — High
+   - Submit recycling request — Medium
+   - Track recycling request — Medium
+   - Admin manages recycler listings — Low
+5. Select the first three high-priority tasks for the first sprint.
+6. Move them to To Do.
+7. Move a task to In Progress when work begins.
+8. Move it to Done after completing and checking it.
 
 Project 2: Mental Health Management System
-Objective: Develop a system for mood tracking, appointment booking, and accessing mental health resources.
-Performance steps
-1. Create another Trello board named Mental Health Management – Agile.
-2. Create four lists: Product Backlog, To Do, In Progress, and Done.
-3. Add the following cards to the Product Backlog.
-Task card	Priority
-User registration and login	High
-Record and view mood history	High
-Book therapist appointment	High
-Access mental health resources	Medium
-View appointment history	Medium
-Admin manages users and resources	Low
 
+Objective:
+Develop a system for mood tracking, appointment booking, and mental health resources.
+
+Steps:
+1. Create a board named Mental Health Management - Agile.
+2. Create lists: Product Backlog, To Do, In Progress, and Done.
+3. Add these cards to the Product Backlog:
+   - User registration and login — High
+   - Record and view mood history — High
+   - Book therapist appointment — High
+   - Access mental health resources — Medium
+   - View appointment history — Medium
+   - Admin manages users and resources — Low
 4. Select the first three high-priority tasks for the first sprint.
-5. Move these cards into To Do.
-6. Move a card to In Progress when development starts.
-7. After testing and completion, move it to Done.
-</pre>
+5. Move them to To Do.
+6. Move a task to In Progress when development starts.
+7. Move it to Done after testing and completion.
+        </pre>
     </div>
 
-
-
-
     <script>
-        function copyCode(codeId, button) {
-            const code = document.getElementById(codeId).textContent;
+        function toggleCard(card) {
+            const expanded = card.classList.toggle("expanded");
+            card.setAttribute("aria-expanded", String(expanded));
+        }
 
-            navigator.clipboard.writeText(code).then(() => {
-                button.textContent = "Copied!";
+        function handleCardKey(event, card) {
+            if (event.target.closest("button")) return;
 
-                setTimeout(() => {
-                    button.textContent = "Copy Code";
-                }, 2000);
-            }).catch(() => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                toggleCard(card);
+            }
+        }
+
+        async function copyCode(codeId, button) {
+            const element = document.getElementById(codeId);
+            if (!element) return;
+
+            const textToCopy = element.textContent.trim();
+            const originalText = button.textContent.trim();
+
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+            } catch (error) {
                 const textarea = document.createElement("textarea");
-                textarea.value = code;
+                textarea.value = textToCopy;
+                textarea.style.position = "fixed";
+                textarea.style.opacity = "0";
                 document.body.appendChild(textarea);
                 textarea.select();
                 document.execCommand("copy");
                 textarea.remove();
+            }
 
-                button.textContent = "Copied!";
+            button.textContent = "Copied!";
 
-                setTimeout(() => {
-                    button.textContent = "Copy Code";
-                }, 2000);
-            });
+            setTimeout(() => {
+                button.textContent = originalText || "Copy Code";
+            }, 2000);
         }
     </script>
 
