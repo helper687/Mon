@@ -1,581 +1,102 @@
-n = int(input("Enter number of queens: "))
-board = []
+Open draw.io.
+
+
+
+Select Device to save your diagram locally.
+
+
+
+Choose Create New Diagram → Blank Diagram.
+
+
+
+Name it E-Waste Recycler Finder Class Diagram.
+
+
+
+From the shapes panel, enable UML or search for UML Class.
+
+
+
+Drag class shapes onto the canvas. Each class has three sections: class name, attributes, and methods.
+
+
+
+Create the following classes and connect them using relationship lines.
+
+E-Waste Recycler Finder Class Diagram:
+
+classDiagram
+    class User {
+        +int userId
+        +string name
+        +string email
+        +searchRecycler()
+        +submitRequest()
+    }
+    class RecyclerCenter {
+        +int centerId
+        +string name
+        +string address
+        +string acceptedWaste
+        +getDetails()
+    }
+    class SearchService {
+        +searchByLocation()
+        +filterByWasteType()
+    }
+    class RecyclingRequest {
+        +int requestId
+        +string wasteType
+        +string status
+        +createRequest()
+        +updateStatus()
+    }
+    User --> SearchService : searches
+    SearchService --> RecyclerCenter : finds
+    User --> RecyclingRequest : submits
+    RecyclingRequest --> RecyclerCenter : sent to
+
+
+Mental Health:
+
+classDiagram
+    class User {
+        +int userId
+        +string name
+        +string email
+        +recordMood()
+        +bookAppointment()
+    }
+    class MoodEntry {
+        +int entryId
+        +string mood
+        +string notes
+        +date entryDate
+        +saveEntry()
+        +viewHistory()
+    }
+    class Appointment {
+        +int appointmentId
+        +date appointmentDate
+        +string status
+        +book()
+        +cancel()
+    }
+    class Therapist {
+        +int therapistId
+        +string name
+        +string specialization
+        +viewAppointments()
+    }
+    class Resource {
+        +int resourceId
+        +string title
+        +string category
+        +viewResource()
+    }
+    User "1" --> "*" MoodEntry : records
+    User "1" --> "*" Appointment : books
+    Therapist "1" --> "*" Appointment : manages
+    User --> Resource : accesses
 
-def solve(row):
-    if row == n:
-        print("Solution:", board)
-        return True
-
-    for col in range(n):
-        if all(col != board[i] and
-               abs(col - board[i]) != row - i
-               for i in range(row)):
-            board.append(col)
-
-            if solve(row + 1):
-                return True
-
-            board.pop()
-
-    return False
-
-if not solve(0):
-    print("No solution exists")
-
-Enter number of queens: 4
-Solution: [1, 3, 0, 2]
-
-Explanation
-Backtracking places queens row by row on the chessboard. The board list stores each queen's column position, while the solve(row) function tries to place a queen in a safe position. The all() function checks column and diagonal conflicts, and abs() calculates the difference between positions. If a position is unsafe, board.pop() removes the last queen and tries another position. If no valid arrangement exists, the program prints No solution exists.
-
-Result: The N-Queen problem is solved using backtracking.
-
-
-
-
-from collections import deque
-
-n = int(input("Enter size (3 for 8-puzzle, 4 for 15-puzzle): "))
-size = n * n
-
-print("Enter puzzle numbers (use 0 for blank):")
-start = tuple(map(int, input().split()))
-
-goal = tuple(list(range(1, size)) + [0])
-
-q = deque([(start, [])])
-visited = {start}
-
-while q:
-    state, path = q.popleft()
-
-    if state == goal:
-        print("Solution:")
-        for s in path + [state]:
-            print(s)
-        break
-
-    z = state.index(0)
-
-    for m in [-n, n, -1, 1]:
-        p = z + m
-
-        if 0 <= p < size and not (
-            (m == -1 and z % n == 0) or
-            (m == 1 and z % n == n-1)
-        ):
-            new = list(state)
-            new[z], new[p] = new[p], new[z]
-            new = tuple(new)
-
-            if new not in visited:
-                visited.add(new)
-                q.append((new, path + [state]))
-else:
-    print("No solution found")
-
-
-Enter size (3 for 8-puzzle, 4 for 15-puzzle): 3
-Enter puzzle numbers (use 0 for blank):
-1 2 3 4 0 6 7 5 8
-
-Solution:
-(1, 2, 3, 4, 0, 6, 7, 5, 8)
-(1, 2, 3, 4, 5, 6, 7, 0, 8)
-(1, 2, 3, 4, 5, 6, 7, 8, 0)
-
-Explanation: BFS (Breadth-First Search) explores puzzle states level by level. Queue (deque) stores states to be explored, while the visited set prevents repeated states. The initial state is entered by the user, and the goal state contains numbers in order with 0 representing the blank space. Blank movement swaps 0 with an adjacent number, and the path stores the sequence of states until the goal is reached.
-
-
-
-
-from collections import deque
-
-a = int(input("Enter capacity of first jug: "))
-b = int(input("Enter capacity of second jug: "))
-target = int(input("Enter target amount: "))
-
-q = deque([(0, 0)])
-visited = {(0, 0)}
-
-while q:
-    x, y = q.popleft()
-    print(x, y)
-
-    if x == target or y == target:
-        print("Target reached!")
-        break
-
-    states = [
-        (a, y), (x, b), (0, y), (x, 0),
-        (x - min(x, b-y), y + min(x, b-y)),
-        (x + min(y, a-x), y - min(y, a-x))
-    ]
-
-    for s in states:
-        if s not in visited:
-            visited.add(s)
-            q.append(s)
-else:
-    print("Target cannot be measured")
-
-
-Enter capacity of first jug: 4
-Enter capacity of second jug: 3
-Enter target amount: 2
-
-0 0
-4 0
-0 3
-4 3
-1 3
-3 0
-1 0
-3 3
-0 1
-4 2
-Target reached!
-
-Explanation
-BFS (Breadth-First Search) explores possible water-jug states level by level. The queue stores the water amounts in both jugs, and visited prevents repeated states. The states list represents filling, emptying, and transferring water between the jugs. The min() function calculates the maximum transferable amount without overflowing a jug. The process continues until one jug contains the target amount.
-
-Result: The Water Jug problem is solved using BFS.
-
-
-
-
-
-from itertools import permutations
-
-n = int(input("Enter number of cities: "))
-
-cost = []
-for i in range(n):
-    row = list(map(int, input(f"Enter costs for city {i}: ").split()))
-    cost.append(row)
-
-cities = list(range(1, n))
-min_cost = float('inf')
-
-for p in permutations(cities):
-    path = (0,) + p + (0,)
-    total = 0
-
-    for i in range(n):
-        total += cost[path[i]][path[i+1]]
-
-    if total < min_cost:
-        min_cost = total
-        best_path = path
-
-print("Best route:", best_path)
-print("Minimum cost:", min_cost)
-
-
-Enter number of cities: 4
-Enter costs for city 0: 0 10 15 20
-Enter costs for city 1: 10 0 35 25
-Enter costs for city 2: 15 35 0 30
-Enter costs for city 3: 20 25 30 0
-
-Best route: (0, 1, 3, 2, 0)
-Minimum cost: 80
-
-Explanation
-TSP (Travelling Salesman Problem) finds the minimum-cost route that visits every city once and returns to the starting city. The cost matrix stores travel costs between cities, and permutations() generates all possible visiting orders. The path starts and ends at city 0, while the total variable calculates each route's cost. The min_cost variable stores the lowest cost, and best_path stores the corresponding route.
-
-Result: The Travelling Salesman Problem is solved using brute-force search.
-
-
-
-
-
-
-graph = {
-    'A': [('B', 1), ('C', 3)],
-    'B': [('D', 1), ('E', 5)],
-    'C': [('F', 2)],
-    'D': [],
-    'E': [],
-    'F': []
-}
-
-h = {'A': 4, 'B': 2, 'C': 1, 'D': 0, 'E': 0, 'F': 0}
-
-start = input("Enter start node: ")
-goal = input("Enter goal node: ")
-
-open_list = [(h[start], 0, start, [start])]
-
-while open_list:
-    open_list.sort()
-    f, g, node, path = open_list.pop(0)
-
-    if node == goal:
-        print("Path:", path)
-        print("Cost:", g)
-        break
-
-    for neighbour, cost in graph[node]:
-        new_g = g + cost
-        new_f = new_g + h[neighbour]
-        open_list.append((new_f, new_g, neighbour, path + [neighbour]))
-else:
-    print("Path not found")
-
-
-Enter start node: A
-Enter goal node: D
-
-Path: ['A', 'B', 'D']
-Cost: 2
-
-Explanation
-A* Search is an informed search algorithm that finds a path using the evaluation function \(f(n)=g(n)+h(n)\). Here, g(n) represents the actual cost from the start node, h(n) is the estimated cost to the goal, and f(n) is the total estimated cost. The graph stores connected nodes and their costs, while open_list stores nodes waiting to be explored. The algorithm selects the node with the lowest f value until the goal is reached.
-
-Result: A* search is implemented to find a path between two nodes
-
-
-
-
-
-def alphabeta(depth, index, maximizing, values, alpha, beta):
-    if depth == 2:
-        return values[index]
-
-    if maximizing:
-        best = -999
-
-        for i in range(2):
-            value = alphabeta(depth + 1, index * 2 + i,
-                              False, values, alpha, beta)
-            best = max(best, value)
-            alpha = max(alpha, best)
-
-            if beta <= alpha:
-                break
-
-        return best
-
-    else:
-        best = 999
-
-        for i in range(2):
-            value = alphabeta(depth + 1, index * 2 + i,
-                              True, values, alpha, beta)
-            best = min(best, value)
-            beta = min(beta, best)
-
-            if beta <= alpha:
-                break
-
-        return best
-
-
-values = list(map(int, input("Enter 4 leaf values: ").split()))
-
-answer = alphabeta(0, 0, True, values, -999, 999)
-print("Optimal value:", answer)
-
-
-Enter 4 leaf values: 3 5 6 9
-
-Optimal value: 5/6
-
-Explanation
-Alpha-Beta Pruning improves the Minimax algorithm by avoiding branches that cannot affect the final decision. The maximizing player chooses the maximum value, while the minimizing player chooses the minimum value. alpha stores the best value for the maximizing player, and beta stores the best value for the minimizing player. When beta <= alpha, the remaining branches are pruned because they cannot change the result.
-
-Result: Alpha-Beta pruning is implemented to find the optimal value while reducing unnecessary searches.
-
-
-
-
-
-
-# AND gate using Perceptron Learning Rule
-
-inputs = [(0, 0), (0, 1), (1, 0), (1, 1)]
-targets = [0, 0, 0, 1]
-
-w1 = 0
-w2 = 0
-bias = 0
-lr = 0.1
-
-for epoch in range(10):
-    for i in range(4):
-        x1, x2 = inputs[i]
-        output = 1 if w1*x1 + w2*x2 + bias > 0 else 0
-        error = targets[i] - output
-
-        w1 += lr * error * x1
-        w2 += lr * error * x2
-        bias += lr * error
-
-print("Predictions:")
-for x1, x2 in inputs:
-    output = 1 if w1*x1 + w2*x2 + bias > 0 else 0
-    print(x1, x2, "=", output)
-
-
-
-Predictions:
-0 0 = 0
-0 1 = 0
-1 0 = 0
-1 1 = 1
-
-
-Explanation
-A single-layer perceptron is a basic artificial neuron used for binary classification. The inputs (x1, x2) are multiplied by weights (w1, w2) and added to the bias. The activation function produces either 0 or 1. The Perceptron Learning Rule updates the weights and bias using the prediction error and learning rate (lr). Training repeats for several epochs until the perceptron learns the AND gate.
-
-Result: A single-layer perceptron is implemented successfully using the Perceptron Learning Rule.
-
-
-
-
-
-
-from sklearn.neural_network import MLPClassifier
-
-# Training data (XOR gate)
-X = [[0, 0], [0, 1], [1, 0], [1, 1]]
-y = [0, 1, 1, 0]
-
-# Create and train MLP
-model = MLPClassifier(
-    hidden_layer_sizes=(4,),
-    activation='relu',
-    solver='lbfgs',
-    max_iter=2000,
-    random_state=1
-)
-
-model.fit(X, y)
-
-# Predict output
-print("Predictions:")
-for x in X:
-    print(x, "=", model.predict([x])[0])
-
-
-# pip install scikit-learn
-
-Predictions:
-[0, 0] = 0
-[0, 1] = 1
-[1, 0] = 1
-[1, 1] = 0
-
-Explanation
-A Multi-Layer Perceptron (MLP) is a neural network containing an input layer, one or more hidden layers, and an output layer. Supervised learning trains the model using input data (X) and their correct labels (y). MLPClassifier creates the neural network, hidden_layer_sizes specifies the hidden layer, and fit() trains the model using backpropagation. Finally, predict() predicts the output for each input.
-
-Result: A Multi-Layer Perceptron is implemented using supervised learning to learn the XOR gate.
-
-
-
-
-
-
-from sklearn.cluster import KMeans
-
-# Input data
-X = [[1, 2], [2, 3], [3, 4],
-     [8, 9], [9, 8], [10, 10]]
-
-k = int(input("Enter number of clusters: "))
-
-model = KMeans(n_clusters=k, random_state=0, n_init=10)
-model.fit(X)
-
-print("Cluster labels:", model.labels_)
-print("Cluster centers:")
-print(model.cluster_centers_)
-
-
-# pip install scikit-learn
-
-Enter number of clusters: 2
-
-Cluster labels: [1 1 1 0 0 0]
-Cluster centers:
-[[ 9.   9. ]
- [ 2.   3. ]]
-
-Note: Cluster label order may vary.
-
-Explanation
-Unsupervised learning finds patterns in data without predefined output labels. K-Means divides data into a specified number of clusters (k). fit() trains the model by grouping similar data points, labels_ shows the cluster assigned to each point, and cluster_centers_ gives the center of each cluster.
-
-Result: An unsupervised learning algorithm is implemented using K-Means clustering.
-
-
-
-
-import numpy as np
-
-# Stored patterns
-X = np.array([
-    [1, -1, 1, -1],
-    [-1, 1, -1, 1]
-])
-
-# Create weight matrix
-W = X.T @ X
-np.fill_diagonal(W, 0)
-
-# Take input from user
-x = np.array(list(map(int, input(
-    "Enter 4 values (-1 or 1): ").split())))
-
-# Recall pattern
-y = np.sign(W @ x)
-
-print("Recalled pattern:", y)
-
-Enter 4 values (-1 or 1): 1 -1 1 -1
-
-Recalled pattern: [ 1. -1.  1. -1.]
-
-Explanation
-An Associative Memory Network stores patterns and recalls them when an input is provided. The stored patterns (X) are represented using 1 and -1. The weight matrix (W) stores relationships between pattern elements, and np.fill_diagonal() sets its diagonal values to zero. The recall operation multiplies the weight matrix by the input pattern, while np.sign() converts the result into 1 or -1.
-
-Result: An associative memory network is implemented using a simple Hopfield-style weight matrix.
-
-
-
-x = float(input("Enter temperature (0-40): "))
-
-# Membership functions
-def cold(x):
-    return max(0, min(1, (20 - x) / 10))
-
-def warm(x):
-    return max(0, min((x - 10) / 10, (30 - x) / 10, 1))
-
-def hot(x):
-    return max(0, min(1, (x - 20) / 10))
-
-# Fuzzification
-print("Cold:", cold(x))
-print("Warm:", warm(x))
-print("Hot:", hot(x))
-
-Enter temperature (0-40): 25
-
-Cold: 0
-Warm: 0.5
-Hot: 0.5
-
-Explanation
-Fuzzy logic represents values with degrees of membership between 0 and 1. A membership function determines how strongly an input belongs to a fuzzy set such as Cold, Warm, or Hot. Fuzzification converts a crisp input, such as a temperature of 25°C, into fuzzy membership values. The min() and max() functions keep membership values within the range 0 to 1.
-
-Result: Fuzzy membership functions are implemented, and the input temperature is fuzzified.
-
-
-
-
-temp = float(input("Enter temperature (0-40): "))
-
-# Fuzzification
-cold = max(0, min(1, (25 - temp) / 10))
-warm = max(0, min(1, (temp - 15) / 10))
-hot = max(0, min(1, (temp - 25) / 10))
-
-# Fuzzy rules
-if temp <= 15:
-    speed = 0
-elif temp <= 25:
-    speed = 40
-elif temp <= 35:
-    speed = 70
-else:
-    speed = 100
-
-# Output
-print("Cold membership:", round(cold, 2))
-print("Warm membership:", round(warm, 2))
-print("Hot membership:", round(hot, 2))
-print("Fan speed:", speed, "%")
-
-Enter temperature (0-40): 30
-
-Cold membership: 0
-Warm membership: 1
-Hot membership: 0.5
-Fan speed: 70 %
-
-
-Explanation
-A Fuzzy Logic Controller (FLC) controls fan speed according to the room temperature. Fuzzification converts the temperature into membership values for Cold, Warm, and Hot. Fuzzy rules determine the fan speed: low temperature gives low speed, medium temperature gives moderate speed, and high temperature gives high speed. The controller then displays the calculated fan speed. This is a simplified simulation using temperature-based rules, not a complete fuzzy inference system.
-
-Result: A basic fuzzy logic controller for automatic fan speed control is designed and simulated.
-
-
-
-import random
-
-# Fitness function
-def fitness(x):
-    return x * x
-
-# Initial population
-population = [random.randint(0, 10) for _ in range(4)]
-
-for i in range(10):
-    population.sort(key=fitness, reverse=True)
-
-    # Selection
-    parent1 = population[0]
-    parent2 = population[1]
-
-    # Crossover
-    child = (parent1 + parent2) // 2
-
-    # Mutation
-    if random.random() < 0.3:
-        child = random.randint(0, 10)
-
-    population[-1] = child
-
-best = max(population, key=fitness)
-
-print("Best solution:", best)
-print("Maximum fitness:", fitness(best))
-
-Best solution: 10
-Maximum fitness: 100
-
-
-Explanation
-A Genetic Algorithm (GA) is an evolutionary optimization technique inspired by natural selection. The population contains possible solutions, and the fitness function evaluates each solution. Selection chooses the best parents, crossover combines them to produce a child, and mutation introduces random changes to maintain diversity. These steps repeat for several generations to find a good solution.
-
-Result: A Genetic Algorithm is implemented to find a solution with high fitness.
-
-
-
-from langchain_openai import ChatOpenAI
-
-# Create AI model
-model = ChatOpenAI(model="gpt-4.1-mini")
-
-# Take user input
-question = input("Enter your question: ")
-
-# Automate response
-response = model.invoke(question)
-
-print("AI Agent:", response.content)
-
-#pip install langchain-openai
-
-Enter your question: Suggest 3 tasks to organize my study schedule.
-
-AI Agent: 1. Create a daily study timetable.
-2. Prioritize difficult subjects.
-3. Review your progress every evening.
-
-Explanation
-An AI agent uses an AI model to process input and produce a useful response. LangChain connects Python applications with language models, ChatOpenAI initializes the model, input() accepts the user's query, and invoke() sends the query to the model. The response is displayed using response.content. This is a basic AI-powered application; a full automation agent would also use tools to perform actions such as sending emails or updating files.
-
-Result: A basic AI-powered assistant is implemented using LangChain and Python.
