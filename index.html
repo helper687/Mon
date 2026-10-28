@@ -452,7 +452,7 @@ flowchart LR
         <pre class="hidden-code" id="code10">
 
 Ewaste:
-Level 0:
+Level 0:    
 
 flowchart LR
     U[User] -->|Location and waste type| S((E-Waste Recycler Finder))
@@ -516,15 +516,47 @@ flowchart LR
 
     <div class="code-container">
         <div class="code-header">
-            <h2>Evolutionary Algorithm such as Genetic Algorithm</h2>
+            <h2>Develop Activity diagram for the project using any opensource tool</h2>
             <button class="copy-btn" onclick="copyCode('code10', this)">
                 Copy Code
             </button>
         </div>
 
-        <pre class="hidden-code" id="code11">
+        <pre class="hidden-code" id="code10">
 
 
+Ewaste:
+
+flowchart TD
+    A([Start]) --> B[Open Application]
+    B --> C[Enter Location]
+    C --> D[Select Waste Type]
+    D --> E[Search Recycler]
+    E --> F{Recycler Found?}
+    F -->|Yes| G[View Recycler Details]
+    G --> H[Submit Recycling Request]
+    H --> I[Receive Confirmation]
+    F -->|No| J[Show No Results]
+    I --> K([End])
+    J --> K
+
+
+Mental Health:
+
+flowchart TD
+    A([Start]) --> B[Open Application]
+    B --> C[Login]
+    C --> D{Valid Login?}
+    D -->|No| E[Show Error]
+    E --> C
+    D -->|Yes| F[Open Dashboard]
+    F --> G{Select Activity}
+    G -->|Track Mood| H[Enter Mood]
+    H --> I[Save Mood]
+    G -->|Book Appointment| J[Select Therapist]
+    J --> K[Confirm Appointment]
+    I --> L([End])
+    K --> L
 
 
 </pre>
@@ -532,44 +564,103 @@ flowchart LR
 
     <div class="code-container">
         <div class="code-header">
-            <h2>Create aAI Agent </h2>
-            <button class="copy-btn" onclick="copyCode('code12', this)">
+            <h2>Develop State transition diagram for the project using any opensource tool</h2>
+            <button class="copy-btn" onclick="copyCode('code10', this)">
                 Copy Code
             </button>
         </div>
 
-        <pre class="hidden-code" id="code12">
+        <pre class="hidden-code" id="code10">
 
-from langchain_openai import ChatOpenAI
+Ewaste:
 
-# Create AI model
-model = ChatOpenAI(model="gpt-4.1-mini")
+stateDiagram-v2
+    [*] --> Created
+    Created --> Pending : Submit request
+    Pending --> Accepted : Recycler accepts
+    Pending --> Rejected : Recycler rejects
+    Accepted --> InProgress : Recycling begins
+    InProgress --> Completed : Recycling finished
+    Rejected --> [*]
+    Completed --> [*]
 
-# Take user input
-question = input("Enter your question: ")
 
-# Automate response
-response = model.invoke(question)
+Mental Health:
 
-print("AI Agent:", response.content)
+stateDiagram-v2
+    [*] --> Requested
+    Requested --> Confirmed : Therapist confirms
+    Requested --> Cancelled : User cancels
+    Confirmed --> Rescheduled : Change date
+    Rescheduled --> Confirmed : New time confirmed
+    Confirmed --> InProgress : Session starts
+    InProgress --> Completed : Session ends
+    Confirmed --> Cancelled : Appointment cancelled
+    Cancelled --> [*]
+    Completed --> [*]
 
-#pip install langchain-openai
-
-Enter your question: Suggest 3 tasks to organize my study schedule.
-
-AI Agent: 1. Create a daily study timetable.
-2. Prioritize difficult subjects.
-3. Review your progress every evening.
-
-Explanation
-An AI agent uses an AI model to process input and produce a useful response. LangChain connects Python applications with language models, ChatOpenAI initializes the model, input() accepts the user's query, and invoke() sends the query to the model. The response is displayed using response.content. This is a basic AI-powered application; a full automation agent would also use tools to perform actions such as sending emails or updating files.
-
-Result: A basic AI-powered assistant is implemented using LangChain and Python.
 
 </pre>
     </div>
 
-    
+    <div class="code-container">
+        <div class="code-header">
+            <h2>Explore agile methodology tools (Jira or Trello)</h2>
+            <button class="copy-btn" onclick="copyCode('code10', this)">
+                Copy Code
+            </button>
+        </div>
+
+        <pre class="hidden-code" id="code10">
+
+Aim: To explore an Agile project management tool and manage project tasks using an Agile workflow.
+
+Tool: Trello — beginner-friendly, online, and suitable for this practical.
+
+Theory: Agile is a software development approach in which a project is developed in small steps, with continuous feedback and regular improvements. Trello helps teams organize tasks and track their progress using boards, lists, and cards.
+Project 1: E-Waste Recycler Finder
+Objective: Develop a system to find nearby e-waste recyclers.
+Performance steps
+1. Open Trello and log in.
+2. Create a board named E-Waste Recycler Finder – Agile.
+3. Create four lists: Product Backlog, To Do, In Progress, and Done.
+4. Add the following cards to the Product Backlog.
+Task card	Priority
+User registration and login	High
+Search recyclers by location	High
+View recycler details	High
+Submit recycling request	Medium
+Track recycling request	Medium
+Admin manages recycler listings	Low
+
+5. Select the first three high-priority tasks for your first sprint.
+6. Move selected cards to To Do.
+7. Start work by moving a card to In Progress.
+8. After completing and checking a task, move it to Done.
+
+
+
+
+Project 2: Mental Health Management System
+Objective: Develop a system for mood tracking, appointment booking, and accessing mental health resources.
+Performance steps
+1. Create another Trello board named Mental Health Management – Agile.
+2. Create four lists: Product Backlog, To Do, In Progress, and Done.
+3. Add the following cards to the Product Backlog.
+Task card	Priority
+User registration and login	High
+Record and view mood history	High
+Book therapist appointment	High
+Access mental health resources	Medium
+View appointment history	Medium
+Admin manages users and resources	Low
+
+4. Select the first three high-priority tasks for the first sprint.
+5. Move these cards into To Do.
+6. Move a card to In Progress when development starts.
+7. After testing and completion, move it to Done.
+</pre>
+    </div>
 
 
 
